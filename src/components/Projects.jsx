@@ -7,7 +7,7 @@ const projects = [
         status: "completed",
         description: "Aplicación web full-stack para la gestión de pedidos de una pastelería.",
         tags: ["Astro", "React", "Tailwind", "Node.js", "Nnostores", "Resend API"],
-        image: "/proyectos/pw-1.png", // Asegúrate de tener estas imágenes o cambiar la ruta
+        image: "/proyectos/pw-1.webp", // Asegúrate de tener estas imágenes o cambiar la ruta
         demoLink: "https://www.conesenciaamau.com/",
         repoLink: "#"
     },
@@ -17,7 +17,7 @@ const projects = [
         status: "in-progress",
         description: "Desarrollo integral de una aplicación web para la Cámara Patagónica de Empresas de Autotransporte de Cargas. El sistema combina un portal institucional de alto rendimiento con una plataforma de gestión interna.",
         tags: ["Astro", "React", "Tailwind", "Supabase", "Puppeteer", "JSZip", "Resend API"],
-        image: "/proyectos/pw-2.png",
+        image: "/proyectos/pw-2.webp",
         demoLink: "#",
         repoLink: "#"
     },

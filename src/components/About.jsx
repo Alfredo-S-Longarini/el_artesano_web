@@ -13,7 +13,7 @@ const About = () => {
                     {/* Imagen 1 (Fondo - Inclinada a la izquierda) */}
                     {/* Usamos 'absolute' para sacarla del flujo y colocarla detrás */}
                     <img
-                        src="/img/bocetos-taller.png"
+                        src="/img/bocetos-taller.webp"
                         alt="Bocetos de diseño web"
                         className="absolute top-0 left-0 md:left-8 w-3/4 rounded-lg shadow-xl transform -rotate-12 z-0 transition-transform hover:scale-105 duration-500"
                     />
@@ -21,7 +21,7 @@ const About = () => {
                     {/* Imagen 2 (Frente - Inclinada a la derecha) */}
                     {/* Usamos 'absolute' y posicionamiento bottom/right para crear el solapamiento */}
                     <img
-                        src="/img/bocetos-taller1.png"
+                        src="/img/bocetos-taller1.webp"
                         alt="Detalle de bocetos"
                         className="absolute bottom-8 right-0 md:right-8 w-3/4 rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.15)] transform rotate-6 z-10 transition-transform hover:scale-105 duration-500"
                     />

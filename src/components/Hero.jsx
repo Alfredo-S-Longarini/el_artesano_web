@@ -7,7 +7,7 @@ const Hero = () => {
             {/* Imagen de Fondo (Madera oscura) */}
             <div className="absolute inset-0 z-0">
                 <img
-                    src="/img/wood-bg.jpg" // CAMBIAR POR LA RUTA REAL DE TU FONDO
+                    src="/img/wood-bg.webp" // CAMBIAR POR LA RUTA REAL DE TU FONDO
                     alt="Fondo de madera"
                     className="w-full h-full object-cover opacity-60"
                 />
@@ -52,7 +52,7 @@ const Hero = () => {
                 {/* Columna Derecha: Imagen del Personaje */}
                 <div className="flex justify-center md:justify-end mt-8 md:mt-0">
                     <img
-                        src="/img/character.svg" // CAMBIAR POR LA RUTA REAL DE TU PERSONAJE
+                        src="/img/character.webp" // CAMBIAR POR LA RUTA REAL DE TU PERSONAJE
                         alt="Desarrollador artesano"
                         className="w-3/4 md:w-[65%] max-w-md object-contain drop-shadow-2xl"
                     />

@@ -6,7 +6,7 @@ const Services = () => {
     const services = [
         {
             id: 1,
-            icon: "/img/engranaje.svg",
+            icon: "/img/engranaje.webp",
             price: 300,
             originalPrice: null,
             isPopular: false,
@@ -24,7 +24,7 @@ const Services = () => {
         },
         {
             id: 2,
-            icon: "/img/mecanismo_completo.svg",
+            icon: "/img/mecanismo_completo.webp",
             price: 510,
             originalPrice: 600,
             isPopular: true,
@@ -42,7 +42,7 @@ const Services = () => {
         },
         {
             id: 3,
-            icon: "/img/cronografo_a_medida.svg",
+            icon: "/img/cronografo_a_medida.webp",
             price: 1500,
             originalPrice: 1800,
             isPopular: false,
@@ -65,7 +65,7 @@ const Services = () => {
     const maintenanceServices = [
         {
             id: 4,
-            icon: "/img/sm-1.svg",
+            icon: "/img/sm-1.webp",
             price: 25,
             title: "Puesta a Punto Esencial",
             desc: "Clientes que no planean hacer cambios en su web pero quieren la seguridad de que todo funciona y está protegido.",
@@ -79,7 +79,7 @@ const Services = () => {
         },
         {
             id: 5,
-            icon: "/img/sm-2.svg",
+            icon: "/img/sm-2.webp",
             price: 50,
             title: "Soporte prioritario",
             desc: "Clientes que, además de seguridad, necesitan hacer pequeñas actualizaciones de contenido de vez en cuando (cambiar un texto, una foto, subir una nueva entrada al blog, etc.).",
