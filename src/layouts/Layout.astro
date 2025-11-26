@@ -1,35 +1,78 @@
 ---
-import "../styles/global.css";
-
+import "../styles/global.css"
 interface Props {
   title: string;
+  description?: string;
+  image?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description = "Desarrollador Web Artesanal. Diseño y construyo sitios web a medida, rápidos y optimizados para SEO. Especialista en Astro, React y Tailwind.",
+  image = "/img/og-image.webp", // Necesitarás crear esta imagen
+} = Astro.props;
+
+// Calculamos la URL canónica automáticamente
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
 <html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Diseño y Desarrollo Web de Precisión" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/logo-favicon.webp" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        name: "Alfredo Sobarzo Longarini | Desarrollador Web",
+        image: new URL("/img/og-image.webp", Astro.site), // Tu imagen del hero
+        "@id": Astro.site,
+        url: Astro.site,
+        telephone: "+542995041548", // Opcional
+        priceRange: "$$",
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "AR",
+          addressRegion: "Río Negro", // O tu provincia real
+        },
+        sameAs: [
+          "https://github.com/Alfredo-S-Longarini",
+          "https://www.linkedin.com/in/alfredo-s-longarini/",
+          "https://www.instagram.com/elartesanoweb/",
+        ],
+        description:
+          "Desarrollo web artesanal y a medida. Sitios rápidos, seguros y escalables construidos con Astro y React.",
+      })}
+    />
   </head>
-  <body
-    class="bg-brand-cream text-brand-dark antialiased w-min[1920px] mx-auto"
-  >
+  <body class="bg-[#1a1510]">
     <slot />
   </body>
 </html>
