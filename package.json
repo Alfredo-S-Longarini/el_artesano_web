@@ -1,0 +1,22 @@
+{
+  "name": "el_artesano_web",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/vercel": "^9.0.1",
+    "@tailwindcss/vite": "^4.1.15",
+    "@types/react": "^19.2.3",
+    "@types/react-dom": "^19.2.2",
+    "astro": "^5.14.7",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "resend": "^6.5.2"
+  }
+}
