@@ -1,0 +1,90 @@
+---
+// src/components/Hero.astro
+import { Image } from "astro:assets";
+
+import woodBg from "../assets/wood-bg.webp";
+import characterImg from "../assets/character.webp"; // o .webp si ya la convertiste
+---
+
+<section id="home"
+  class="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#2C241B]"
+>
+  {/* Imagen de Fondo OPTIMIZADA */}
+  <div class="absolute inset-0 z-0">
+    <Image
+      src={woodBg}
+      alt="Fondo de madera"
+      class="w-full h-full object-cover opacity-60"
+      quality="mid"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-black/40"></div>
+  </div>
+
+  {/* Contenedor Principal */}
+  <div
+    class="relative z-10 container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-20"
+  >
+    {/* Columna Izquierda: Texto */}
+    <div class="text-left space-y-6" data-aos="fade-right">
+      <h1
+        class="text-4xl md:text-5xl lg:text-6xl font-sans text-[#EFEFEF] leading-tight"
+      >
+        Construyo Mecanismos Digitales <br class="hidden md:block" />
+        que Perduran en el Tiempo.
+      </h1>
+
+      <p class="text-lg text-stone-300 max-w-lg font-light font-serif">
+        Diseño y Desarrollo Web de Precisión para marcas que valoran la calidad
+        y el detalle.
+      </p>
+
+      {/* Botones (Opción C) */}
+      <div class="flex flex-col items-start gap-3 pt-6">
+        <a
+          href="#proyectos"
+          class="group relative px-8 py-3.5 bg-[#5D4037] text-[#EFEFEF] font-serif text-lg rounded shadow-[0_10px_20px_rgba(93,64,55,0.4)] hover:shadow-[0_15px_25px_rgba(93,64,55,0.6)] hover:bg-[#4E342E] transition-all duration-300 flex items-center gap-3 transform hover:-translate-y-1"
+        >
+          <span>Ver Últimas Creaciones</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 transform group-hover:translate-x-1 transition-transform"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+
+        <p class="text-stone-400 text-sm font-sans ml-1 mt-1">
+          o descubre mis <a
+            href="#servicios"
+            class="text-amber-500 hover:text-amber-400 underline decoration-amber-500/30 underline-offset-4 transition-colors"
+            >Servicios y Soluciones</a
+          >
+        </p>
+      </div>
+    </div>
+
+    {/* Columna Derecha: Personaje OPTIMIZADO */}
+    <div
+      class="flex justify-center md:justify-end mt-8 md:mt-0"
+      data-aos="fade-left"
+    >
+      <Image
+        src={characterImg}
+        alt="Desarrollador artesano"
+        width={800}
+        class="w-3/4 md:w-[65%] lg:w-full max-w-md lg:max-w-2xl object-contain drop-shadow-2xl"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+</section>

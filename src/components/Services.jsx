@@ -185,7 +185,7 @@ const Services = () => {
                                             {/* Precio Actual */}
                                             <div className="flex items-baseline gap-1">
                                                 <span className="text-3xl font-bold text-[#5c4033]">
-                                                    ${service.price}
+                                                    ${service.price}usd
                                                 </span>
                                                 <span className="text-sm text-stone-500">
                                                     {activeTab === 'maintenance' ? '/ mes' : '/ pago único'}
