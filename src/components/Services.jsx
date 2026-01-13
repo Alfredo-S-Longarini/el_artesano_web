@@ -1,7 +1,90 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+// --- HOOK PARA MANEJAR MONEDAS Y TASAS ---
+const useCurrencyRates = () => {
+    // 1. ESTADO INICIAL DETERMINISTA:
+    // Siempre empezamos en 'USD' para que coincida con el servidor.
+    // No leemos localStorage aquí directamente.
+    const [currency, setCurrency] = useState('USD');
+    const [rates, setRates] = useState({ ARS: 0, CRC: 0 });
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // 2. LEER LOCALSTORAGE (Solo ocurre en el cliente):
+        // Una vez que el componente se ha montado ("hidratado"), 
+        // chequeamos si hay una preferencia guardada y actualizamos.
+        const savedCurrency = localStorage.getItem('selectedCurrency');
+        if (savedCurrency) {
+            setCurrency(savedCurrency);
+        }
+
+        // 3. OBTENER TASAS DE CAMBIO
+        const fetchRates = async () => {
+            try {
+                const resArs = await fetch('https://dolarapi.com/v1/dolares/blue');
+                const dataArs = await resArs.json();
+
+                const resCrc = await fetch('https://open.er-api.com/v6/latest/USD');
+                const dataCrc = await resCrc.json();
+
+                setRates({
+                    ARS: dataArs.venta,
+                    CRC: dataCrc.rates.CRC
+                });
+            } catch (error) {
+                console.error("Error al obtener tasas:", error);
+                setRates({ ARS: 1500, CRC: 515 });
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchRates();
+    }, []); // Se ejecuta una sola vez al montar
+
+    // 4. GUARDAR PREFERENCIA
+    // Usamos un segundo useEffect que escuche cambios en 'currency'
+    // para guardar la elección del usuario, pero evitamos guardar el valor inicial por defecto si no queremos.
+    useEffect(() => {
+        if (currency) {
+            localStorage.setItem('selectedCurrency', currency);
+        }
+    }, [currency]);
+
+    return { currency, setCurrency, rates, loading };
+};
 
 const Services = () => {
     const [activeTab, setActiveTab] = useState('development');
+
+    // Integramos el hook de monedas
+    const { currency, setCurrency, rates, loading } = useCurrencyRates();
+
+    // --- FUNCIÓN DE CONVERSIÓN Y FORMATEO ---
+    const formatPrice = (priceInUsd) => {
+        if (!priceInUsd) return null;
+
+        let finalPrice = priceInUsd;
+        let locale = 'en-US';
+        let currencyCode = 'USD';
+
+        if (currency === 'ARS') {
+            finalPrice = priceInUsd * rates.ARS;
+            locale = 'es-AR';
+            currencyCode = 'ARS';
+        } else if (currency === 'CRC') {
+            finalPrice = priceInUsd * rates.CRC;
+            locale = 'es-CR';
+            currencyCode = 'CRC';
+        }
+
+        // Formateador nativo de JavaScript
+        return new Intl.NumberFormat(locale, {
+            style: 'currency',
+            currency: currencyCode,
+            maximumFractionDigits: 0, // Sin decimales para ARS/CRC para limpieza visual
+        }).format(finalPrice);
+    };
 
     const services = [
         {
@@ -118,6 +201,26 @@ const Services = () => {
                     </p>
                 </div>
 
+                <div className="flex justify-center mb-8" data-aos="fade-up">
+                    <div className="bg-white p-1 rounded-lg border border-stone-200 shadow-sm inline-flex items-center text-sm font-sans">
+                        <span className="px-3 text-stone-400 hidden sm:block">Moneda:</span>
+
+                        {['USD', 'ARS', 'CRC'].map((curr) => (
+                            <button
+                                key={curr}
+                                onClick={() => setCurrency(curr)}
+                                disabled={loading}
+                                className={`px-4 py-1.5 rounded-md transition-all font-medium ${currency === curr
+                                    ? 'bg-[#5c4033] text-white shadow-sm'
+                                    : 'text-stone-600 hover:bg-stone-50'
+                                    }`}
+                            >
+                                {curr === 'USD' ? 'USD ($)' : curr === 'ARS' ? 'ARS ($)' : 'CRC (₡)'}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
                 {/* Pestañas de Navegación */}
                 <div className="flex justify-center mb-12" data-aos="fade-up">
                     <div className="bg-white p-1 rounded-full shadow-md inline-flex">
@@ -174,7 +277,7 @@ const Services = () => {
                                             {service.originalPrice && (
                                                 <div className="flex items-center gap-2 mb-1">
                                                     <span className="text-stone-400 line-through text-sm font-medium">
-                                                        ${service.originalPrice}
+                                                        {formatPrice(service.originalPrice)}
                                                     </span>
                                                     <span className="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded-full">
                                                         Ahorras {getDiscountPercent(service.originalPrice, service.price)}%
@@ -185,7 +288,7 @@ const Services = () => {
                                             {/* Precio Actual */}
                                             <div className="flex items-baseline gap-1">
                                                 <span className="text-3xl font-bold text-[#5c4033]">
-                                                    ${service.price}usd
+                                                    {formatPrice(service.price)}
                                                 </span>
                                                 <span className="text-sm text-stone-500">
                                                     {activeTab === 'maintenance' ? '/ mes' : '/ pago único'}
