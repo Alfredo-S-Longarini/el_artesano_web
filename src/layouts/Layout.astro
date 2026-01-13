@@ -1,5 +1,5 @@
 ---
-import "../styles/global.css"
+import "../styles/global.css";
 
 interface Props {
   title: string;
@@ -29,7 +29,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    
+
     {/* Robots: Importante para permitir indexación global */}
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Alfredo Sobarzo Longarini" />
@@ -40,7 +40,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.url)} />
-    <meta property="og:locale" content="es_ES" /> {/* Español genérico */}
+    <meta property="og:locale" content="es_ES" />
+    {/* Español genérico */}
     <meta property="og:site_name" content="El Artesano Web" />
 
     {/* --- TWITTER --- */}
@@ -64,49 +65,71 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "ProfessionalService", // Ideal para freelancers/agencias
-        "name": "Alfredo Sobarzo Longarini | El Artesano Web",
-        "image": new URL("/img/og-image.webp", Astro.site),
+        name: "Alfredo Sobarzo Longarini | El Artesano Web",
+        image: new URL("/img/og-image.webp", Astro.site),
         "@id": Astro.site,
-        "url": Astro.site,
-        "telephone": "+542995041548",
-        "priceRange": "$$",
-        
+        url: Astro.site,
+        telephone: "+542995041548",
+        priceRange: "$$",
+
         // TU UBICACIÓN FÍSICA (Real, Google necesita saber dónde existes)
-        "address": {
+        address: {
           "@type": "PostalAddress",
-          "addressCountry": "AR",
-          "addressRegion": "Río Negro",
-          "addressLocality": "Cipolletti" 
+          addressCountry: "AR",
+          addressRegion: "Río Negro",
+          addressLocality: "Cipolletti",
         },
 
         // ÁREA DE SERVICIO (Aquí le decimos a Google dónde trabajas)
-        "areaServed": [
-          { "@type": "Country", "name": "Argentina" },
-          { "@type": "Country", "name": "Costa Rica" },
-          { "@type": "Country", "name": "United States" }, // Opcional
-          { "@type": "contentLocation", "name": "Mundial" } // Servicio Remoto
+        areaServed: [
+          { "@type": "Country", name: "Argentina" },
+          { "@type": "Country", name: "Costa Rica" },
+          { "@type": "Country", name: "United States" }, // Opcional
+          { "@type": "contentLocation", name: "Mundial" }, // Servicio Remoto
         ],
 
         // HABILIDADES (Keywords técnicas)
-        "knowsAbout": [
+        knowsAbout: [
           "Desarrollo Web",
           "Astro Framework",
           "React.js",
           "SEO Técnico",
           "Optimización Web",
-          "Diseño UI/UX"
+          "Diseño UI/UX",
         ],
 
-        "sameAs": [
+        sameAs: [
           "https://github.com/Alfredo-S-Longarini",
           "https://www.linkedin.com/in/alfredo-s-longarini/",
           "https://www.instagram.com/elartesanoweb/",
         ],
-        "description": "Desarrollo web artesanal y a medida. Sitios rápidos, seguros y escalables construidos con Astro y React para clientes globales."
+        description:
+          "Desarrollo web artesanal y a medida. Sitios rápidos, seguros y escalables construidos con Astro y React para clientes globales.",
       })}
     />
   </head>
   <body class="bg-[#1a1510]">
     <slot />
+
+    <script>
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1, // Se dispara cuando se ve el 10% del elemento
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target); // Solo animar una vez
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".reveal, .reveal-left").forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
   </body>
 </html>

@@ -1,33 +1,38 @@
 ---
-// src/components/Hero.astro
+// 1. Importaciones de Astro
 import { Image } from "astro:assets";
 
+// 2. Importar las imágenes locales para optimización
 import woodBg from "../assets/wood-bg.webp";
-import characterImg from "../assets/character.webp"; // o .webp si ya la convertiste
+import characterImg from "../assets/character.webp";
 ---
 
-<section id="home"
-  class="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#2C241B]"
+<section
+  class="relative w-full min-h-[90vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-[#2C241B]"
 >
-  {/* Imagen de Fondo OPTIMIZADA */}
+  {/* --- FONDO OPTIMIZADO --- */}
   <div class="absolute inset-0 z-0">
     <Image
       src={woodBg}
-      alt="Fondo de madera"
-      class="w-full h-full object-cover opacity-60"
-      quality="mid"
+      alt="Fondo de madera oscura texturizada"
+      class="w-full h-full object-cover opacity-60 animate-bg-slow"
+      quality="high"
       loading="eager"
-      fetchpriority="high"
     />
+    {
+      /* 'loading="eager"' es vital para el LCP (Largest Contentful Paint) en el Hero */
+    }
+
+    {/* Overlay oscuro */}
     <div class="absolute inset-0 bg-black/40"></div>
   </div>
 
-  {/* Contenedor Principal */}
+  {/* --- CONTENEDOR PRINCIPAL --- */}
   <div
     class="relative z-10 container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-20"
   >
     {/* Columna Izquierda: Texto */}
-    <div class="text-left space-y-6" data-aos="fade-right">
+    <div class="text-left space-y-6 reveal-left">
       <h1
         class="text-4xl md:text-5xl lg:text-6xl font-sans text-[#EFEFEF] leading-tight"
       >
@@ -35,18 +40,19 @@ import characterImg from "../assets/character.webp"; // o .webp si ya la convert
         que Perduran en el Tiempo.
       </h1>
 
-      <p class="text-lg text-stone-300 max-w-lg font-light font-serif">
+      <p class="text-lg text-stone-300 max-w-lg font-serif">
         Diseño y Desarrollo Web de Precisión para marcas que valoran la calidad
         y el detalle.
       </p>
 
-      {/* Botones (Opción C) */}
       <div class="flex flex-col items-start gap-3 pt-6">
+        {/* Botón Principal CTA */}
         <a
           href="#proyectos"
           class="group relative px-8 py-3.5 bg-[#5D4037] text-[#EFEFEF] font-serif text-lg rounded shadow-[0_10px_20px_rgba(93,64,55,0.4)] hover:shadow-[0_15px_25px_rgba(93,64,55,0.6)] hover:bg-[#4E342E] transition-all duration-300 flex items-center gap-3 transform hover:-translate-y-1"
         >
           <span>Ver Últimas Creaciones</span>
+          {/* Icono de flecha animado */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5 transform group-hover:translate-x-1 transition-transform"
@@ -62,6 +68,7 @@ import characterImg from "../assets/character.webp"; // o .webp si ya la convert
           </svg>
         </a>
 
+        {/* Texto Secundario */}
         <p class="text-stone-400 text-sm font-sans ml-1 mt-1">
           o descubre mis <a
             href="#servicios"
@@ -72,18 +79,15 @@ import characterImg from "../assets/character.webp"; // o .webp si ya la convert
       </div>
     </div>
 
-    {/* Columna Derecha: Personaje OPTIMIZADO */}
+    {/* Columna Derecha: Imagen del Personaje */}
     <div
-      class="flex justify-center md:justify-end mt-8 md:mt-0"
-      data-aos="fade-left"
+      class="flex justify-center md:justify-end mt-8 md:mt-0 reveal"
     >
       <Image
         src={characterImg}
-        alt="Desarrollador artesano"
-        width={800}
-        class="w-3/4 md:w-[65%] lg:w-full max-w-md lg:max-w-2xl object-contain drop-shadow-2xl"
+        alt="Ilustración de desarrollador web estilo artesano"
+        class="w-3/4 md:w-[65%] max-w-md object-contain drop-shadow-2xl"
         loading="eager"
-        fetchpriority="high"
       />
     </div>
   </div>

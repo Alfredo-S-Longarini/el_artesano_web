@@ -45,7 +45,7 @@ const projects = [
 <section id="proyectos" class="py-24 bg-[#1a1510] text-[#EFEFEF]">
   <div class="container mx-auto px-6">
     {/* Encabezado */}
-    <div class="mb-16 text-center" data-aos="fade-up">
+    <div class="mb-16 text-center reveal">
       <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4 text-[#EFEFEF]">
         Proyectos Selectos
       </h2>
@@ -60,7 +60,7 @@ const projects = [
         projects.map((project, index) => (
           <article
             class:list={[
-              "group relative rounded-xl overflow-hidden border transition-all duration-300 hover:-translate-y-2",
+              "group relative rounded-xl overflow-hidden border transition-all duration-300 hover:-translate-y-2 reveal",
               {
                 // Lógica condicional de clases usando 'class:list' de Astro
                 "bg-[#231e19]/50 border-amber-500/30 border-dashed":
@@ -69,8 +69,7 @@ const projects = [
                   project.status !== "in-progress",
               },
             ]}
-            data-aos="fade-up"
-            data-aos-delay={index * 100}
+            style={`transition-delay: ${index * 100}ms`}
           >
             {/* Badge de Estado (Solo si está en desarrollo) */}
             {project.status === "in-progress" && (

@@ -81,3 +81,67 @@ body {
   background-color: var(--color-dark);
   opacity: 0.1;
 }
+
+/* Estado inicial: Invisible y desplazado hacia abajo */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+/* Estado activo: Visible y en su lugar */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variación para que entre desde la izquierda (opcional) */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-50px); /* Se mueve desde la izquierda */
+    transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-left.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+/* --- ANIMACIÓN INMEDIATA PARA EL HERO --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-hero {
+    opacity: 0; /* Comienza invisible */
+    animation: fadeInUp 1s cubic-bezier(0.5, 0, 0, 1) forwards; /* Se ejecuta sola */
+}
+
+/* Retrasos para que aparezcan uno después del otro */
+.delay-100 { animation-delay: 0.1s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-500 { animation-delay: 0.5s; }
+
+@keyframes subtleZoom {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1); /* Crece solo un 10% */
+    }
+}
+
+.animate-bg-slow {
+    /* 20s de duración, movimiento suave, infinito, y alterna (ida y vuelta) */
+    animation: subtleZoom 20s ease-in-out infinite alternate;
+    will-change: transform; /* Optimización para la tarjeta gráfica */
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 // --- HOOK PARA MANEJAR MONEDAS Y TASAS ---
 const useCurrencyRates = () => {
@@ -174,6 +175,18 @@ const Services = () => {
         },
     ];
 
+    const cardVariants = {
+        hidden: { opacity: 0, y: 50 }, // Empieza invisible y abajo
+        visible: (index) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                delay: index * 0.1, // Delay escalonado automático
+                duration: 0.5
+            }
+        })
+    };
+
     const handleConsult = (serviceTitle) => {
         // 1. Codificamos el título para que sea válido en una URL (quita espacios, tildes, etc)
         const encodedSubject = encodeURIComponent(serviceTitle);
@@ -191,54 +204,60 @@ const Services = () => {
         <section id="servicios" className="py-24 bg-[#F9F7F2] text-[#5c4033]">
             <div className="container mx-auto px-6">
 
-                {/* Encabezado */}
-                <div className="text-center mb-12" data-aos="fade-up">
+                {/* Encabezado animado */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }} // Animar solo una vez
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-8"
+                >
                     <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
                         Servicios a Medida
                     </h2>
                     <p className="text-lg font-sans text-stone-600 max-w-2xl mx-auto">
                         Soluciones diseñadas para adaptarse a la etapa actual de tu negocio.
                     </p>
-                </div>
+                </motion.div>
 
-                <div className="flex justify-center mb-8" data-aos="fade-up">
+                {/* Selector de Moneda */}
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="flex justify-center mb-8"
+                >
                     <div className="bg-white p-1 rounded-lg border border-stone-200 shadow-sm inline-flex items-center text-sm font-sans">
                         <span className="px-3 text-stone-400 hidden sm:block">Moneda:</span>
-
                         {['USD', 'ARS', 'CRC'].map((curr) => (
                             <button
                                 key={curr}
                                 onClick={() => setCurrency(curr)}
                                 disabled={loading}
-                                className={`px-4 py-1.5 rounded-md transition-all font-medium ${currency === curr
-                                    ? 'bg-[#5c4033] text-white shadow-sm'
+                                className={`px-4 py-1.5 rounded-md transition-all font-medium ${
+                                    currency === curr 
+                                    ? 'bg-[#5c4033] text-white shadow-sm' 
                                     : 'text-stone-600 hover:bg-stone-50'
-                                    }`}
+                                }`}
                             >
                                 {curr === 'USD' ? 'USD ($)' : curr === 'ARS' ? 'ARS ($)' : 'CRC (₡)'}
                             </button>
                         ))}
                     </div>
-                </div>
+                </motion.div>
 
-                {/* Pestañas de Navegación */}
-                <div className="flex justify-center mb-12" data-aos="fade-up">
+                {/* Pestañas */}
+                <div className="flex justify-center mb-12">
                     <div className="bg-white p-1 rounded-full shadow-md inline-flex">
                         <button
                             onClick={() => setActiveTab('development')}
-                            className={`px-6 py-2 rounded-full font-serif transition-all duration-300 ${activeTab === 'development'
-                                ? 'bg-[#5c4033] text-white shadow-lg'
-                                : 'text-[#5c4033] hover:bg-stone-100'
-                                }`}
+                            className={`px-6 py-2 rounded-full font-serif transition-all duration-300 ${activeTab === 'development' ? 'bg-[#5c4033] text-white shadow-lg' : 'text-[#5c4033] hover:bg-stone-100'}`}
                         >
                             Desarrollo Web
                         </button>
                         <button
                             onClick={() => setActiveTab('maintenance')}
-                            className={`px-6 py-2 rounded-full font-serif transition-all duration-300 ${activeTab === 'maintenance'
-                                ? 'bg-[#5c4033] text-white shadow-lg'
-                                : 'text-[#5c4033] hover:bg-stone-100'
-                                }`}
+                            className={`px-6 py-2 rounded-full font-serif transition-all duration-300 ${activeTab === 'maintenance' ? 'bg-[#5c4033] text-white shadow-lg' : 'text-[#5c4033] hover:bg-stone-100'}`}
                         >
                             Mantenimiento
                         </button>
@@ -246,102 +265,82 @@ const Services = () => {
                 </div>
 
                 {/* Grid de Tarjetas */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+                {/* Usamos layout de Framer Motion para animar el cambio de tabs suavemente */}
+                <motion.div 
+                    layout 
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start"
+                >
                     {(activeTab === 'development' ? services : maintenanceServices).map((service, index) => (
-                        <div
+                        <motion.div
                             key={service.id}
-                            className={`relative bg-white rounded-2xl p-8 border transition-all duration-300 flex flex-col h-full hover:shadow-xl hover:-translate-y-1 ${service.isPopular ? 'border-amber-500 shadow-lg ring-1 ring-amber-500/20' : 'border-stone-200'
-                                }`}
-                            data-aos="fade-up"
-                            data-aos-delay={index * 100}
+                            // Props de animación mágica
+                            variants={cardVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: "-50px" }}
+                            custom={index} // Pasamos el índice para el delay escalonado
+                            
+                            className={`relative bg-white rounded-2xl p-8 border transition-all duration-300 flex flex-col h-full hover:shadow-xl hover:-translate-y-1 ${service.isPopular ? 'border-amber-500 shadow-lg ring-1 ring-amber-500/20' : 'border-stone-200'}`}
                         >
-                            {/* Etiqueta Popular */}
+                            {/* ... (Contenido de la tarjeta IGUAL que antes) ... */}
                             {service.isPopular && (
                                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                                     Más Popular
                                 </span>
                             )}
 
-                            {/* Icono y Título */}
                             <div className="text-center mb-6">
-                                <div className="w-[200px] h-[200px] rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
-                                    {service.icon && <img src={service.icon} alt="" />}
+                                <div className="w-[200px] h-[200px] rounded-full flex items-center justify-center text-3xl mx-auto mb-4 overflow-hidden">
+                                    {service.icon && <img src={service.icon} alt={service.title} className="w-full h-full object-contain" />}
                                 </div>
                                 <h3 className="text-2xl font-serif font-bold text-[#5c4033]">{service.title}</h3>
-
-                                {/* Precio */}
                                 <div className="mt-3 font-sans flex flex-col items-center justify-center min-h-14">
+                                    {/* ... Lógica de precio ... */}
                                     {service.price > 0 ? (
                                         <>
-                                            {/* Si hay precio original (oferta), mostramos la comparativa */}
-                                            {service.originalPrice && (
-                                                <div className="flex items-center gap-2 mb-1">
-                                                    <span className="text-stone-400 line-through text-sm font-medium">
-                                                        {formatPrice(service.originalPrice)}
-                                                    </span>
-                                                    <span className="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded-full">
-                                                        Ahorras {getDiscountPercent(service.originalPrice, service.price)}%
-                                                    </span>
-                                                </div>
-                                            )}
-
-                                            {/* Precio Actual */}
-                                            <div className="flex items-baseline gap-1">
+                                            <div className="flex items-baseline gap-1 flex-wrap justify-center">
                                                 <span className="text-3xl font-bold text-[#5c4033]">
                                                     {formatPrice(service.price)}
                                                 </span>
                                                 <span className="text-sm text-stone-500">
-                                                    {activeTab === 'maintenance' ? '/ mes' : '/ pago único'}
+                                                    {currency} {activeTab === 'maintenance' ? '/ mes' : ''}
                                                 </span>
                                             </div>
+                                            {activeTab !== 'maintenance' && (
+                                                 <span className="text-xs text-stone-400 mt-1 block">pago único</span>
+                                            )}
                                         </>
                                     ) : (
-                                        // Caso: Precio a medida (0)
-                                        <span className="text-2xl font-bold text-[#5c4033] mt-2 block">
-                                            A medida
-                                        </span>
+                                        <span className="text-2xl font-bold text-[#5c4033] mt-2 block">A medida</span>
                                     )}
                                 </div>
                             </div>
-
-                            {/* Descripción */}
-                            <p className="text-stone-600 text-center text-sm mb-6 leading-relaxed">
-                                {service.desc}
-                            </p>
-
-                            {/* Lista de características */}
+                            
+                            <p className="text-stone-600 text-center text-sm mb-6 leading-relaxed">{service.desc}</p>
+                            
                             <ul className="space-y-3 mb-8 grow">
                                 {service.content.map((item, i) => (
                                     <li key={i} className="flex items-start text-sm text-stone-700">
-                                        <svg className="w-5 h-5 text-amber-500 mr-2 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
+                                        <svg className="w-5 h-5 text-amber-500 mr-2 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
                                         {item}
                                     </li>
                                 ))}
                             </ul>
 
-                            {/* Footer de la tarjeta: Tiempo y Botón */}
                             <div className="mt-auto pt-6 border-t border-stone-100 text-center">
                                 {service.time && (
                                     <p className="text-xs text-stone-400 mb-4 font-semibold uppercase tracking-wide">
                                         Tiempo estimado: {service.time}
                                     </p>
                                 )}
-                                <a
-                                    href="#contacto"
-                                    className={`block w-full py-3 rounded-lg font-medium transition-colors ${service.isPopular
-                                        ? 'bg-[#5c4033] text-white hover:bg-[#4a332a]'
-                                        : 'bg-stone-100 text-[#5c4033] hover:bg-stone-200'
-                                        }`}
-                                >
+
+                                <a href="#contacto" className={`block w-full py-3 rounded-lg font-medium transition-colors ${service.isPopular ? 'bg-[#5c4033] text-white hover:bg-[#4a332a]' : 'bg-stone-100 text-[#5c4033] hover:bg-stone-200'}`}>
                                     Consultar ahora
                                 </a>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
-
+                </motion.div>
             </div>
         </section>
     );

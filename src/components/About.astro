@@ -1,0 +1,75 @@
+---
+// 1. Importamos el componente de imagen y los assets
+import { Image } from "astro:assets";
+import bocetosImg from "../assets/bocetos-taller.webp";
+import bocetos1Img from "../assets/bocetos-taller1.webp";
+---
+
+<section id="taller" class="py-20 md:py-24 overflow-hidden bg-[#F9F7F2]">
+  <div
+    class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
+  >
+    {/* --- Columna de Imágenes (Efecto Collage) --- */}
+    <div
+      class="relative w-full max-w-[450px] mx-auto h-[350px] md:h-[450px] my-10 reveal-left"
+    >
+      {/* Imagen 1 (Fondo - Inclinada a la izquierda) */}
+      <Image
+        src={bocetosImg}
+        alt="Bocetos de diseño web y wireframes"
+        class="absolute top-0 left-0 md:left-8 w-3/4 rounded-lg shadow-xl transform -rotate-12 z-0 transition-transform hover:scale-105 duration-500 object-cover"
+        width={500}
+      />
+
+      {/* Imagen 2 (Frente - Inclinada a la derecha) */}
+      <Image
+        src={bocetos1Img}
+        alt="Detalle de bocetos y herramientas de trabajo"
+        class="absolute bottom-8 right-0 md:right-8 w-3/4 rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.15)] transform rotate-6 z-10 transition-transform hover:scale-105 duration-500 object-cover"
+        width={500}
+      />
+    </div>
+
+    {/* --- Columna de Texto --- */}
+    <div
+      class="text-center md:text-left space-y-6 reveal"
+    >
+      <h2
+        class="text-3xl md:text-4xl lg:text-5xl font-sans font-semibold text-[#5c4033] leading-tight"
+      >
+        Artesanía en un Mundo Digital.
+      </h2>
+
+      {/* --- Bloque de Identidad y Autoridad (SEO) --- */}
+      <div class="relative py-2">
+        <p class="font-serif text-lg md:text-xl text-[#5c4033] leading-relaxed">
+          Soy <strong class="font-bold">Alfredo Sobarzo Longarini</strong>,
+          fundador y desarrollador detrás de <strong class="font-bold"
+            >El Artesano Web</strong
+          >.
+        </p>
+      </div>
+
+      <p class="font-serif text-base md:text-lg text-gray-700 leading-relaxed">
+        En un mundo de soluciones rápidas y efímeras, mi taller se rige por la
+        <span class="font-semibold text-[#5c4033]">
+          pausa, la precisión y el compromiso
+        </span>
+        con lo bien hecho.
+      </p>
+
+      <p class="font-serif text-base md:text-lg text-gray-700 leading-relaxed">
+        Trato cada sitio web como una pieza de relojería: un mecanismo diseñado
+        a medida, donde cada engranaje, visible e invisible, tiene un propósito
+        y está construido para durar.
+      </p>
+
+      {/* Firma */}
+      <div
+        class="pt-4 font-handwriting text-2xl text-[#5c4033] opacity-80 rotate-2"
+      >
+        A.S.L.
+      </div>
+    </div>
+  </div>
+</section>
