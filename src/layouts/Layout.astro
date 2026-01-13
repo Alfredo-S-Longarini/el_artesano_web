@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css"
+
 interface Props {
   title: string;
   description?: string;
@@ -8,11 +9,11 @@ interface Props {
 
 const {
   title,
-  description = "Desarrollador Web Artesanal. Diseño y construyo sitios web a medida, rápidos y optimizados para SEO. Especialista en Astro, React y Tailwind.",
-  image = "/img/og-image.webp", // Necesitarás crear esta imagen
+  // Descripción optimizada con keywords geográficas sutiles
+  description = "Desarrollador Web Freelance experto en Astro y React. Diseño sitios web rápidos y a medida para clientes en Argentina, Costa Rica y el mundo. Consultoría SEO y desarrollo frontend.",
+  image = "/img/og-image.webp",
 } = Astro.props;
 
-// Calculamos la URL canónica automáticamente
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -24,51 +25,84 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" type="image/svg+xml" href="/logo-favicon.webp" />
     <meta name="generator" content={Astro.generator} />
 
+    {/* --- SEO PRINCIPAL --- */}
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    
+    {/* Robots: Importante para permitir indexación global */}
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Alfredo Sobarzo Longarini" />
 
+    {/* --- OPEN GRAPH (Facebook/LinkedIn/WhatsApp) --- */}
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:locale" content="es_ES" /> {/* Español genérico */}
+    <meta property="og:site_name" content="El Artesano Web" />
 
+    {/* --- TWITTER --- */}
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
+    {/* --- FUENTES --- */}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+
+    {/* --- DATOS ESTRUCTURADOS (JSON-LD) - CLAVE PARA SEO INTERNACIONAL --- */}
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        name: "Alfredo Sobarzo Longarini | Desarrollador Web",
-        image: new URL("/img/og-image.webp", Astro.site), // Tu imagen del hero
+        "@type": "ProfessionalService", // Ideal para freelancers/agencias
+        "name": "Alfredo Sobarzo Longarini | El Artesano Web",
+        "image": new URL("/img/og-image.webp", Astro.site),
         "@id": Astro.site,
-        url: Astro.site,
-        telephone: "+542995041548", // Opcional
-        priceRange: "$$",
-        address: {
+        "url": Astro.site,
+        "telephone": "+542995041548",
+        "priceRange": "$$",
+        
+        // TU UBICACIÓN FÍSICA (Real, Google necesita saber dónde existes)
+        "address": {
           "@type": "PostalAddress",
-          addressCountry: "AR",
-          addressRegion: "Río Negro", // O tu provincia real
+          "addressCountry": "AR",
+          "addressRegion": "Río Negro",
+          "addressLocality": "Cipolletti" 
         },
-        sameAs: [
+
+        // ÁREA DE SERVICIO (Aquí le decimos a Google dónde trabajas)
+        "areaServed": [
+          { "@type": "Country", "name": "Argentina" },
+          { "@type": "Country", "name": "Costa Rica" },
+          { "@type": "Country", "name": "United States" }, // Opcional
+          { "@type": "contentLocation", "name": "Mundial" } // Servicio Remoto
+        ],
+
+        // HABILIDADES (Keywords técnicas)
+        "knowsAbout": [
+          "Desarrollo Web",
+          "Astro Framework",
+          "React.js",
+          "SEO Técnico",
+          "Optimización Web",
+          "Diseño UI/UX"
+        ],
+
+        "sameAs": [
           "https://github.com/Alfredo-S-Longarini",
           "https://www.linkedin.com/in/alfredo-s-longarini/",
           "https://www.instagram.com/elartesanoweb/",
         ],
-        description:
-          "Desarrollo web artesanal y a medida. Sitios rápidos, seguros y escalables construidos con Astro y React.",
+        "description": "Desarrollo web artesanal y a medida. Sitios rápidos, seguros y escalables construidos con Astro y React para clientes globales."
       })}
     />
   </head>

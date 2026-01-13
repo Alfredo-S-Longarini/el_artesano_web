@@ -108,8 +108,8 @@ const Services = () => {
         {
             id: 2,
             icon: "/img/mecanismo_completo.webp",
-            price: 510,
-            originalPrice: 600,
+            price: 650,
+            originalPrice: null,
             isPopular: true,
             title: "Mecanismo Completo",
             desc: "Restaurantes, cafeterías, startups, o negocios que necesitan mostrar más información y tener funcionalidades específicas.Estructura y configuración técnica para que tu web sea visible y relevante para quienes te buscan en Google.",
@@ -127,7 +127,7 @@ const Services = () => {
             id: 3,
             icon: "/img/cronografo_a_medida.webp",
             price: 1500,
-            originalPrice: 1800,
+            originalPrice: null,
             isPopular: false,
             title: "Cronógrafo a Medida",
             desc: "Para empresas de servicios, turismo o negocios que requieren catálogo de productos (vidriera), reservas o arquitecturas complejas.",
@@ -149,7 +149,7 @@ const Services = () => {
         {
             id: 4,
             icon: "/img/sm-1.webp",
-            price: 25,
+            price: 35,
             title: "Puesta a Punto Esencial",
             desc: "Clientes que no planean hacer cambios en su web pero quieren la seguridad de que todo funciona y está protegido.",
             content: [
@@ -163,7 +163,7 @@ const Services = () => {
         {
             id: 5,
             icon: "/img/sm-2.webp",
-            price: 50,
+            price: 60,
             title: "Soporte prioritario",
             desc: "Clientes que, además de seguridad, necesitan hacer pequeñas actualizaciones de contenido de vez en cuando (cambiar un texto, una foto, subir una nueva entrada al blog, etc.).",
             content: [
