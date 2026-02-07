@@ -17,6 +17,7 @@
     "@types/react-dom": "^19.2.2",
     "astro": "^5.14.7",
     "framer-motion": "^12.26.2",
+    "qrcode.react": "^4.2.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "resend": "^6.5.2"

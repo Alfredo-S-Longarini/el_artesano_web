@@ -150,7 +150,7 @@ const Services = () => {
         {
             id: 4,
             icon: "/img/sm-1.webp",
-            price: 35,
+            price: 60,
             title: "Puesta a Punto Esencial",
             desc: "Clientes que no planean hacer cambios en su web pero quieren la seguridad de que todo funciona y está protegido.",
             content: [
@@ -164,7 +164,7 @@ const Services = () => {
         {
             id: 5,
             icon: "/img/sm-2.webp",
-            price: 60,
+            price: 90,
             title: "Soporte prioritario",
             desc: "Clientes que, además de seguridad, necesitan hacer pequeñas actualizaciones de contenido de vez en cuando (cambiar un texto, una foto, subir una nueva entrada al blog, etc.).",
             content: [

@@ -4,7 +4,7 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     const links = [
-        { name: 'Inicio', href: '#home' },
+        { name: 'Inicio', href: '/' },
         { name: 'Mi Taller', href: '#taller' },
         { name: 'Proyectos', href: '#proyectos' },
         { name: 'Servicios', href: '#servicios' },

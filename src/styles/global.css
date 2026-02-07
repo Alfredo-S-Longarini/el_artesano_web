@@ -145,3 +145,17 @@ body {
     animation: subtleZoom 20s ease-in-out infinite alternate;
     will-change: transform; /* Optimización para la tarjeta gráfica */
 }
+
+/* ... resto de tu CSS ... */
+
+/* Utilidad para ocultar las flechas en inputs numéricos */
+.no-spinner::-webkit-inner-spin-button,
+.no-spinner::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spinner {
+  appearance: textfield;
+  -moz-appearance: textfield; /* Para Firefox */
+}

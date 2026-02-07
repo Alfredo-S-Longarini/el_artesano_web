@@ -1,0 +1,73 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import UtilitiesNavbar from "../../components/shared/UtilitiesNavbar.jsx";
+import UrlShortener from "../../components/tools/UrlShortener.jsx";
+import Footer from "../../components/Footer.jsx";
+---
+
+<Layout
+  title="Acortador de URL Gratuito | El Artesano Web"
+  description="Herramienta gratuita para acortar enlaces largos. Simplifica tus URLs para compartir en redes sociales."
+>
+  <UtilitiesNavbar client:load />
+
+  <main class="bg-[#1a1510] min-h-screen text-[#EFEFEF]">
+    <section class="py-24 container mx-auto px-6">
+      {/* Encabezado */}
+      <div class="text-center mb-12 reveal animate-hero">
+        <a
+          href="/utilidades"
+          class="text-stone-400 hover:text-amber-500 mb-6 inline-flex items-center gap-2 text-sm transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><line x1="19" y1="12" x2="5" y2="12"></line><polyline
+              points="12 19 5 12 12 5"></polyline></svg
+          >
+          Volver al taller
+        </a>
+        <h1
+          class="text-amber-500 font-serif text-3xl md:text-5xl font-bold mb-4"
+        >
+          Acortador de Enlaces
+        </h1>
+        <p class="text-stone-300 text-lg max-w-2xl mx-auto">
+          Convierte URLs imposibles de recordar en enlaces cortos y limpios.
+        </p>
+      </div>
+
+      {/* Componente Interactivo */}
+      <div class="reveal delay-300">
+        <UrlShortener client:load />
+      </div>
+
+      {/* Contenido SEO */}
+      <article
+        class="max-w-3xl mx-auto mt-20 prose prose-invert prose-lg text-stone-400"
+      >
+        <h2 class="text-2xl font-bold font-serif text-amber-500 mb-4">
+          ¿Por qué acortar tus enlaces?
+        </h2>
+        <p>
+          Los enlaces largos suelen romperse en correos electrónicos y se ven
+          poco profesionales en redes sociales como X (Twitter) o Instagram.
+        </p>
+        <p>
+          Esta herramienta utiliza la tecnología de TinyURL para generar enlaces
+          seguros, permanentes y fáciles de compartir. Ideal para compartir
+          documentos de Drive, ubicaciones de Maps o artículos de noticias.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
