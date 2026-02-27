@@ -9,7 +9,7 @@ import characterImg from "../assets/character.webp";
 
 <section
   id="home"
-  class="relative w-full h-fit md:min-h-screen flex items-center justify-center overflow-hidden bg-[#2C241B]"
+  class="relative w-full h-auto overflow-hidden bg-[#2C241B]"
 >
   {/* --- FONDO OPTIMIZADO --- */}
   <div class="absolute inset-0 z-0">
@@ -20,9 +20,6 @@ import characterImg from "../assets/character.webp";
       quality="high"
       loading="eager"
     />
-    {
-      /* 'loading="eager"' es vital para el LCP (Largest Contentful Paint) en el Hero */
-    }
 
     {/* Overlay oscuro */}
     <div class="absolute inset-0 bg-black/40"></div>
@@ -30,10 +27,10 @@ import characterImg from "../assets/character.webp";
 
   {/* --- CONTENEDOR PRINCIPAL --- */}
   <div
-    class="relative z-10 container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-20"
+    class="relative z-10 container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 pt-32 md:pt-40 pb-0"
   >
     {/* Columna Izquierda: Texto */}
-    <div class="text-left space-y-6 reveal-left">
+    <div class="text-left space-y-6 reveal-left pb-12 md:pb-20">
       <h1
         class="text-4xl md:text-5xl lg:text-6xl font-sans text-[#EFEFEF] leading-tight"
       >
@@ -46,31 +43,58 @@ import characterImg from "../assets/character.webp";
         y el detalle.
       </p>
 
-      <div class="flex flex-col items-start gap-3 pt-6">
-        {/* Botón Principal CTA */}
-        <a
-          href="#proyectos"
-          class="group relative px-8 py-3.5 bg-[#5D4037] text-[#EFEFEF] font-serif text-lg rounded shadow-[0_10px_20px_rgba(93,64,55,0.4)] hover:shadow-[0_15px_25px_rgba(93,64,55,0.6)] hover:bg-[#4E342E] transition-all duration-300 flex items-center gap-3 transform hover:-translate-y-1"
-        >
-          <span>Ver Últimas Creaciones</span>
-          {/* Icono de flecha animado */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 transform group-hover:translate-x-1 transition-transform"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+      {/* --- ZONA DE ACCIÓN (Modificada) --- */}
+      <div class="flex flex-col items-start gap-4 pt-6">
+        {/* Grupo de Botones: En fila en PC, columna en Móvil */}
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          {/* 1. Botón Principal (Proyectos) */}
+          <a
+            href="#proyectos"
+            class="group relative px-8 py-3.5 bg-[#5D4037] text-[#EFEFEF] font-serif text-lg rounded shadow-[0_10px_20px_rgba(93,64,55,0.4)] hover:shadow-[0_15px_25px_rgba(93,64,55,0.6)] hover:bg-[#4E342E] transition-all duration-300 flex items-center justify-center gap-3 transform hover:-translate-y-1 text-center"
           >
-            <path
+            <span>Ver Creaciones</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 transform group-hover:translate-x-1 transition-transform"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </a>
+
+          {/* 2. Botón Secundario (Utilidades) - NUEVO */}
+          <!-- <a
+            href="/utilidades"
+            class="group px-8 py-3.5 border border-amber-500/50 text-amber-500 font-serif text-lg rounded hover:bg-amber-500 hover:text-[#2C241B] transition-all duration-300 flex items-center justify-center gap-3 text-center"
+          >
+            {/* Icono de Herramienta */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="2"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-          </svg>
-        </a>
+              class="transform group-hover:rotate-12 transition-transform"
+              ><path
+                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+              ></path></svg
+            >
+            <span>Taller de Utilidades</span>
+          </a> -->
+        </div>
 
-        {/* Texto Secundario */}
-        <p class="text-stone-400 text-sm font-sans ml-1 mt-1">
+        {/* Texto Terciario */}
+        <p class="text-stone-400 text-sm font-sans mt-2">
           o descubre mis <a
             href="#servicios"
             class="text-amber-500 hover:text-amber-400 underline decoration-amber-500/30 underline-offset-4 transition-colors"

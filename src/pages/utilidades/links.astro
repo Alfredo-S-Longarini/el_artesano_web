@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import UtilitiesNavbar from '../../components/shared/UtilitiesNavbar.jsx';
+import UniversalLinkGenerator from '../../components/tools/UniversalLinkGenerator.jsx';
+import Footer from '../../components/Footer.jsx';
+---
+
+<Layout 
+  title="Generador de Links Universal | WhatsApp, Telegram, Mail"
+  description="Crea enlaces directos (click-to-chat) para WhatsApp, Telegram, Correo Electrónico y SMS. Herramienta gratuita."
+>
+  <UtilitiesNavbar client:load />
+
+  <main class="bg-[#1a1510] min-h-screen text-[#EFEFEF]">
+    <section class="py-24 container mx-auto px-6">
+    
+      {/* Encabezado */}
+      <div class="text-center mb-12 reveal animate-hero">
+        <a href="/utilidades" class="text-stone-400 hover:text-amber-500 mb-6 inline-flex items-center gap-2 text-sm transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Volver al taller
+        </a>
+        <h1 class="text-amber-500 font-serif text-3xl md:text-5xl font-bold mb-4">
+          Generador de Enlaces Universal
+        </h1>
+        <p class="text-stone-300 text-lg max-w-2xl mx-auto">
+          Crea conexiones directas. Elige tu plataforma, completa los datos y genera un enlace inteligente listo para compartir.
+        </p>
+      </div>
+
+      {/* Componente Interactivo */}
+      <div class="reveal delay-300">
+        <UniversalLinkGenerator client:load />
+      </div>
+
+      {/* Contenido SEO */}
+      <article class="max-w-3xl mx-auto mt-20 prose prose-invert prose-lg">
+        <h2 class="text-2xl font-bold font-serif text-amber-500">¿Qué puedes generar aquí?</h2>
+        <ul class="text-stone-400 space-y-2 list-none pl-0">
+            <li class="flex gap-2">
+                <span class="text-green-500">💬 <strong>WhatsApp:</strong></span> Inicia chats sin agendar el número.
+            </li>
+            <li class="flex gap-2">
+                <span class="text-blue-400">✈️ <strong>Telegram:</strong></span> Enlaces directos a perfiles de usuario.
+            </li>
+            <li class="flex gap-2">
+                <span class="text-red-400">✉️ <strong>Correo (Mailto):</strong></span> Abre el gestor de correo con asunto y cuerpo predefinidos.
+            </li>
+            <li class="flex gap-2">
+                <span class="text-purple-400">📱 <strong>SMS:</strong></span> Ideal para campañas de marketing móvil.
+            </li>
+        </ul>
+      </article>
+
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

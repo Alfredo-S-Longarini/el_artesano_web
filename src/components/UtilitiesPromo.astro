@@ -1,0 +1,125 @@
+---
+// src/components/UtilitiesPromo.astro
+
+const tools = [
+  {
+    name: "Generador de Links",
+    icon: "💬",
+    desc: "Crea enlaces para WhatsApp, Telegram y Email.",
+    href: "/utilidades/links",
+  },
+  {
+    name: "Generador QR",
+    icon: "📱",
+    desc: "Personaliza y descarga",
+    href: "/utilidades/qr",
+  },
+  {
+    name: "Acortador URL",
+    icon: "✂️",
+    desc: "Simplifica enlaces",
+    href: "/utilidades/acortador",
+  },
+];
+---
+
+<section
+  class="py-24 bg-[#1F1B18] relative overflow-hidden border-y border-amber-500/10"
+>
+  {/* Fondo decorativo sutil */}
+  <div class="absolute inset-0 opacity-5 pointer-events-none">
+    <div
+      class="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute -bottom-24 -left-24 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl"
+    >
+    </div>
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* Columna Izquierda: Texto de Venta */}
+      <div class="reveal text-left">
+        <span
+          class="text-amber-500 font-bold tracking-widest text-sm uppercase mb-2 block"
+        >
+          Recursos Gratuitos
+        </span>
+        <h2
+          class="text-3xl md:text-5xl font-serif font-bold text-[#EFEFEF] mb-6 leading-tight"
+        >
+          El Banco de <br />
+          <span class="text-amber-500">Herramientas Digitales</span>
+        </h2>
+        <p
+          class="text-stone-400 text-lg mb-8 max-w-md font-sans leading-relaxed"
+        >
+          No solo construyo sitios para clientes; también forjo herramientas
+          para la comunidad. Accede a utilidades gratuitas diseñadas para
+          facilitar tu día a día digital.
+        </p>
+
+        {/* Botón Principal (Lleva al índice general de utilidades) */}
+        <a
+          href="/utilidades"
+          class="inline-flex items-center gap-3 px-8 py-4 border border-amber-500/30 text-amber-500 font-bold rounded hover:bg-amber-500 hover:text-[#1a1510] transition-all duration-300 group"
+        >
+          <span>Ver todas las herramientas</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="group-hover:translate-x-1 transition-transform"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+
+      {/* Columna Derecha: Tarjetas Clicables */}
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 reveal delay-300">
+        {
+          tools.map((tool) => (
+            <a
+              href={tool.href}
+              class="group bg-[#26201B] p-6 rounded-xl border border-white/5 hover:border-amber-500 hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center cursor-pointer relative overflow-hidden"
+            >
+              {/* Efecto de brillo al pasar el mouse */}
+              <div class="absolute inset-0 bg-linear-to-br from-amber-500/0 to-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              <div class="relative z-10 w-12 h-12 bg-[#1F1B18] rounded-full flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-[#1a1510] transition-all duration-300 border border-white/5 group-hover:border-transparent">
+                {tool.icon}
+              </div>
+
+              <h3 class="relative z-10 text-[#EFEFEF] font-serif font-bold text-sm mb-1 group-hover:text-amber-500 transition-colors">
+                {tool.name}
+              </h3>
+
+              <p class="relative z-10 text-stone-500 text-xs group-hover:text-stone-300 transition-colors">
+                {tool.desc}
+              </p>
+            </a>
+          ))
+        }
+
+        {/* Tarjeta decorativa extra (No clicable) */}
+        <div class="sm:col-span-3 mt-4 text-center">
+          <p
+            class="text-xs text-stone-500 uppercase tracking-widest opacity-60"
+          >
+            + Nuevas herramientas en forja
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

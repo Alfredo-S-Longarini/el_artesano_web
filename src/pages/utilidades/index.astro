@@ -6,12 +6,11 @@ import Footer from "../../components/Footer.jsx"; // Asegúrate que esta ruta se
 
 const tools = [
   {
-    title: "Link WhatsApp",
-    description:
-      "Genera enlaces directos con mensajes personalizados para tus clientes.",
-    link: "/utilidades/whatsapp",
+    title: "Generador de Links",
+    description: "Crea enlaces inteligentes para WhatsApp, Telegram y Email.",
+    link: "/utilidades/links",
     icon: "💬",
-    status: "active",
+    status: "active"
   },
   {
     title: "Generador QR",
@@ -43,11 +42,11 @@ const tools = [
       {/* Encabezado */}
       <div class="mb-16 text-center reveal animate-hero">
         <h1
-          class="text-4xl md:text-5xl font-serif font-bold mb-4 text-[#EFEFEF]"
+          class="text-4xl md:text-5xl font-sans font-bold mb-4 text-[#EFEFEF]"
         >
           Taller de Utilidades
         </h1>
-        <p class="text-stone-400 font-sans max-w-2xl mx-auto text-lg">
+        <p class="text-stone-400 font-serif max-w-2xl mx-auto text-lg">
           Pequeñas herramientas forjadas para resolver problemas cotidianos.
         </p>
       </div>
@@ -80,15 +79,15 @@ const tools = [
                 )}
               </div>
 
-              <h3 class="text-2xl font-bold text-[#EFEFEF] mb-3 font-serif group-hover:text-amber-500 transition-colors">
+              <h3 class="text-2xl font-bold text-[#EFEFEF] mb-3 font-sans group-hover:text-amber-500 transition-colors">
                 {tool.title}
               </h3>
-              <p class="text-stone-400 font-sans leading-relaxed text-sm">
+              <p class="text-stone-400 font-serif leading-relaxed text-sm">
                 {tool.description}
               </p>
 
               {tool.status === "active" && (
-                <span class="inline-flex items-center gap-2 mt-6 text-amber-500 font-bold text-sm uppercase tracking-wider">
+                <span class="inline-flex items-center gap-2 mt-6 text-amber-500 font-serif font-bold text-sm uppercase tracking-wider">
                   Abrir herramienta
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
