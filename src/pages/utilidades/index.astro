@@ -2,115 +2,101 @@
 // src/pages/utilidades/index.astro
 import Layout from "../../layouts/Layout.astro";
 import UtilitiesNavbar from "../../components/shared/UtilitiesNavbar.jsx";
-import Footer from "../../components/Footer.jsx"; // Asegúrate que esta ruta sea correcta
+import Footer from "../../components/Footer.jsx";
 
 const tools = [
   {
     title: "Generador de Links",
-    description: "Crea enlaces inteligentes para WhatsApp, Telegram y Email.",
+    description: "Crea enlaces inteligentes para WhatsApp, Telegram y Email sin fricciones.",
     link: "/utilidades/links",
-    icon: "💬",
+    icon: "message-square", // Nombre de referencia para un icono
     status: "active"
   },
   {
     title: "Generador QR",
-    description: "Crea códigos QR personalizados con los colores de tu marca.",
+    description: "Crea códigos QR de alta resolución personalizados con tu identidad de marca.",
     link: "/utilidades/qr",
-    icon: "📱",
+    icon: "qr-code",
     status: "active",
   },
   {
     title: "Acortador URL",
-    description: "Simplifica enlaces largos para compartir en redes sociales.",
+    description: "Simplifica y analiza tus enlaces largos para compartirlos en cualquier plataforma.",
     link: "/utilidades/shorturl",
-    icon: "✂️",
+    icon: "link",
     status: "active",
   },
 ];
 ---
 
-<Layout
-  title="Utilidades | El Artesano Web"
-  description="Herramientas gratuitas para desarrolladores y emprendedores."
->
-  {/* Navbar Específico */}
+<Layout title="Taller de Utilidades | El Artesano Web">
   <UtilitiesNavbar client:load />
 
-  {/* Contenedor Principal con estilos de Projects.astro */}
-  <main class="bg-[#1a1510] min-h-screen text-[#EFEFEF]">
-    <section class="py-24 container mx-auto px-6">
-      {/* Encabezado */}
-      <div class="mb-16 text-center reveal animate-hero">
-        <h1
-          class="text-4xl md:text-5xl font-sans font-bold mb-4 text-[#EFEFEF]"
-        >
-          Taller de Utilidades
+  <main class="relative bg-[#1a1510] min-h-screen text-[#EFEFEF] overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+    <section class="relative py-24 container mx-auto px-6">
+      {/* Encabezado con más aire */}
+      <div class="mb-20 text-center max-w-3xl mx-auto">
+        <span class="text-amber-500 font-serif italic text-sm mb-4 block tracking-widest uppercase">Herramientas de Precisión</span>
+        <h1 class="text-5xl md:text-6xl font-sans font-black mb-6 tracking-tight">
+          Taller de <span class="text-transparent bg-clip-text bg-linear-to-r from-[#EFEFEF] to-stone-500">Utilidades</span>
         </h1>
-        <p class="text-stone-400 font-serif max-w-2xl mx-auto text-lg">
-          Pequeñas herramientas forjadas para resolver problemas cotidianos.
+        <p class="text-stone-400 font-serif text-xl leading-relaxed">
+          Pequeñas piezas de software forjadas a mano para elevar tu flujo de trabajo diario.
         </p>
       </div>
 
       {/* Grid de Herramientas */}
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {
-          tools.map((tool, index) => (
-            <a
-              href={tool.link}
-              class:list={[
-                "group block p-8 rounded-xl border transition-all duration-300 reveal",
-                {
-                  "bg-[#231e19] border-white/5 hover:border-amber-500/50 hover:-translate-y-2 hover:shadow-2xl":
-                    tool.status === "active",
-                  "bg-[#231e19]/50 border-white/5 border-dashed cursor-not-allowed opacity-70":
-                    tool.status === "soon",
-                },
-              ]}
-              style={`transition-delay: ${(index + 1) * 100}ms`}
-            >
-              <div class="flex justify-between items-start mb-4">
-                <span class="text-4xl group-hover:scale-110 transition-transform duration-300">
-                  {tool.icon}
-                </span>
-                {tool.status === "soon" && (
-                  <span class="text-xs bg-white/10 text-stone-400 px-2 py-1 rounded-full">
-                    Próximamente
-                  </span>
-                )}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {tools.map((tool, index) => (
+          <a
+            href={tool.link}
+            class:list={[
+              "group relative overflow-hidden p-8 rounded-2xl border transition-all duration-500",
+              {
+                "bg-[#231e19]/40 border-white/5 hover:border-amber-500/40 hover:bg-[#2a241e]": tool.status === "active",
+                "bg-transparent border-dashed border-white/10 opacity-60 cursor-not-allowed": tool.status === "soon",
+              }
+            ]}
+          >
+            <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+               <span class="text-8xl font-black italic">0{index + 1}</span>
+            </div>
+
+            <div class="relative z-10">
+              <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-amber-500/10 text-amber-500 mb-6 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-[#1a1510] transition-all duration-300">
+                {/* Aquí puedes usar un componente de icono real */}
+                <div class="w-6 h-6 border-2 border-current rounded-sm"></div> 
               </div>
 
-              <h3 class="text-2xl font-bold text-[#EFEFEF] mb-3 font-sans group-hover:text-amber-500 transition-colors">
+              <h3 class="text-2xl font-bold mb-3 font-sans">
                 {tool.title}
               </h3>
-              <p class="text-stone-400 font-serif leading-relaxed text-sm">
+              <p class="text-stone-400 font-serif text-[15px] leading-relaxed mb-8">
                 {tool.description}
               </p>
 
-              {tool.status === "active" && (
-                <span class="inline-flex items-center gap-2 mt-6 text-amber-500 font-serif font-bold text-sm uppercase tracking-wider">
-                  Abrir herramienta
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </span>
-              )}
-            </a>
-          ))
-        }
+              <div class="flex items-center gap-2 text-amber-500 text-xs font-bold tracking-[0.2em] uppercase">
+                <span class="h-px w-8 bg-amber-500/30 group-hover:w-12 transition-all"></span>
+                {tool.status === "active" ? "Iniciar Herramienta" : "En la forja"}
+              </div>
+            </div>
+          </a>
+        ))}
       </div>
     </section>
   </main>
-
   <Footer />
 </Layout>
+
+<style>
+  /* Animación de entrada suave */
+  section {
+    animation: fadeIn 0.8s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

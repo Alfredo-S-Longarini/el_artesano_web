@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <circle cx="100" cy="100" r="100" fill="#F9F7F2"/>
+  <!-- Cuaderno / informe -->
+  <rect x="48" y="30" width="80" height="100" rx="6" stroke="#5c4033" stroke-width="5" fill="none"/>
+  <rect x="48" y="30" width="80" height="100" rx="6" fill="#5c4033" fill-opacity="0.05"/>
+  <!-- Espiral del cuaderno (lado izquierdo) -->
+  <circle cx="48" cy="48" r="5" fill="#F9F7F2" stroke="#5c4033" stroke-width="3"/>
+  <circle cx="48" cy="68" r="5" fill="#F9F7F2" stroke="#5c4033" stroke-width="3"/>
+  <circle cx="48" cy="88" r="5" fill="#F9F7F2" stroke="#5c4033" stroke-width="3"/>
+  <circle cx="48" cy="108" r="5" fill="#F9F7F2" stroke="#5c4033" stroke-width="3"/>
+  <!-- Líneas de texto -->
+  <line x1="68" y1="58" x2="112" y2="58" stroke="#5c4033" stroke-width="3" stroke-linecap="round"/>
+  <line x1="68" y1="72" x2="112" y2="72" stroke="#5c4033" stroke-width="3" stroke-linecap="round"/>
+  <line x1="68" y1="86" x2="98" y2="86" stroke="#5c4033" stroke-width="3" stroke-linecap="round"/>
+  <!-- Sello de verificación (círculo dorado con check) -->
+  <circle cx="128" cy="148" r="28" fill="#F9F7F2" stroke="#5c4033" stroke-width="4"/>
+  <circle cx="128" cy="148" r="28" fill="#c8a96e" fill-opacity="0.12"/>
+  <polyline points="116,148 124,156 142,138" stroke="#c8a96e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

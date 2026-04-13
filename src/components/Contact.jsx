@@ -127,6 +127,7 @@ const Contact = () => {
                                     <option value="Presupuesto Web - 3">Cronógrafo a Medida</option>
                                     <option value="Presupuesto Mant - 1">Puesta a Punto Esencial</option>
                                     <option value="Presupuesto Mant - 2">Soporte prioritario</option>
+                                    <option value="Otras Consultas">Otras Consultas</option>
                                 </select>
                             </div>
 
