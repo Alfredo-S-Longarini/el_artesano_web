@@ -1,0 +1,74 @@
+---
+const testimonials = [
+  {
+    initials: "CM",
+    name: "Nombre Apellido",
+    role: "Cargo",
+    company: "CAPEAC",
+    text: "Aquí va el testimonio real. Pedíselo a tu cliente con las preguntas sugeridas más abajo.",
+    placeholder: true,
+  },
+  {
+    initials: "MA",
+    name: "Nombre Apellido",
+    role: "Fundadora",
+    company: "Con Esencia a Mau",
+    text: "Aquí va el testimonio real. Pedíselo a tu cliente con las preguntas sugeridas más abajo.",
+    placeholder: true,
+  },
+  // Agregá un tercero cuando lo tengas:
+  // {
+  //   initials: "XX",
+  //   name: "Nombre Apellido",
+  //   role: "Cargo",
+  //   company: "Empresa",
+  //   text: "Testimonio...",
+  //   placeholder: false,
+  // },
+];
+---
+
+<section id="testimonios" class="py-24 bg-[#F9F7F2] text-[#5c4033]">
+  <div class="container mx-auto px-6">
+
+    <!-- Encabezado -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4">
+        Lo que dicen quienes ya trabajan con el taller
+      </h2>
+      <p class="text-lg font-sans text-stone-600 max-w-2xl mx-auto">
+        Cada proyecto es una relación de confianza. Estas son algunas de las experiencias de quienes eligieron trabajar conmigo.
+      </p>
+    </div>
+
+    <!-- Grid de testimonios -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      {testimonials.map((t) => (
+        <div class={`bg-white rounded-2xl p-8 border border-stone-200 flex flex-col gap-6 ${t.placeholder ? 'opacity-40 select-none' : ''}`}>
+
+          <!-- Comillas decorativas -->
+          <span class="text-6xl font-serif text-amber-300 leading-none select-none">&ldquo;</span>
+
+          <!-- Texto del testimonio -->
+          <p class="font-sans text-stone-700 leading-relaxed text-base -mt-6">
+            {t.text}
+          </p>
+
+          <!-- Autor -->
+          <div class="flex items-center gap-4 mt-auto pt-6 border-t border-stone-100">
+            <!-- Avatar con iniciales -->
+            <div class="w-11 h-11 rounded-full bg-[#5c4033] flex items-center justify-center shrink-0">
+              <span class="text-sm font-serif font-bold text-[#F9F7F2]">{t.initials}</span>
+            </div>
+            <div>
+              <p class="font-serif font-bold text-[#5c4033] text-sm leading-tight">{t.name}</p>
+              <p class="font-sans text-stone-500 text-xs mt-0.5">{t.role} &middot; {t.company}</p>
+            </div>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

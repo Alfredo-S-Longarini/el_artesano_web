@@ -25,6 +25,7 @@ const useCurrencyRates = () => {
                     ARS: dataArs.venta,
                     CRC: dataCrc.rates.CRC
                 });
+                
             } catch (error) {
                 console.error("Error al obtener tasas:", error);
                 setRates({ ARS: 1500, CRC: 515 });
@@ -57,11 +58,11 @@ const Services = () => {
         let currencyCode = 'USD';
 
         if (currency === 'ARS') {
-            finalPrice = priceInUsd * rates.ARS;
+            finalPrice = Math.round(priceInUsd * rates.ARS/1000)*1000;
             locale = 'es-AR';
             currencyCode = 'ARS';
         } else if (currency === 'CRC') {
-            finalPrice = priceInUsd * rates.CRC;
+            finalPrice = Math.round(priceInUsd * rates.CRC/1000)*1000;
             locale = 'es-CR';
             currencyCode = 'CRC';
         }
