@@ -25,7 +25,7 @@ const useCurrencyRates = () => {
                     ARS: dataArs.venta,
                     CRC: dataCrc.rates.CRC
                 });
-                
+
             } catch (error) {
                 console.error("Error al obtener tasas:", error);
                 setRates({ ARS: 1500, CRC: 515 });
@@ -58,11 +58,11 @@ const Services = () => {
         let currencyCode = 'USD';
 
         if (currency === 'ARS') {
-            finalPrice = Math.round(priceInUsd * rates.ARS/1000)*1000;
+            finalPrice = Math.round(priceInUsd * rates.ARS / 1000) * 1000;
             locale = 'es-AR';
             currencyCode = 'ARS';
         } else if (currency === 'CRC') {
-            finalPrice = Math.round(priceInUsd * rates.CRC/1000)*1000;
+            finalPrice = Math.round(priceInUsd * rates.CRC / 1000) * 1000;
             locale = 'es-CR';
             currencyCode = 'CRC';
         }
@@ -258,8 +258,8 @@ const Services = () => {
 
     const activeServices =
         activeTab === 'development' ? services :
-        activeTab === 'maintenance' ? maintenanceServices :
-        otherServices;
+            activeTab === 'maintenance' ? maintenanceServices :
+                otherServices;
 
     const isMaintenanceTab = activeTab === 'maintenance';
     const isOtherTab = activeTab === 'other';
@@ -299,11 +299,10 @@ const Services = () => {
                                     key={curr}
                                     onClick={() => setCurrency(curr)}
                                     disabled={loading}
-                                    className={`px-4 py-1.5 rounded-md transition-all font-medium ${
-                                        currency === curr
-                                        ? 'bg-[#5c4033] text-white shadow-sm'
-                                        : 'text-stone-600 hover:bg-stone-50'
-                                    }`}
+                                    className={`px-4 py-1.5 rounded-md transition-all font-medium ${currency === curr
+                                            ? 'bg-[#5c4033] text-white shadow-sm'
+                                            : 'text-stone-600 hover:bg-stone-50'
+                                        }`}
                                 >
                                     {curr === 'USD' ? 'USD ($)' : curr === 'ARS' ? 'ARS ($)' : 'CRC (₡)'}
                                 </button>
@@ -313,17 +312,40 @@ const Services = () => {
                 )}
 
                 {/* Pestañas */}
-                <div className="flex justify-center mb-12">
-                    <div className="bg-white p-1 rounded-full shadow-md inline-flex">
+                {/* Pestañas / Selector Mobile */}
+                <div id='tab-services' className="flex justify-center mb-12">
+
+                    {/* Vista Mobile: Selector Desplegable */}
+                    <div className="relative block md:hidden w-full max-w-[280px]">
+                        <select
+                            value={activeTab}
+                            onChange={(e) => setActiveTab(e.target.value)}
+                            className="w-full appearance-none bg-white border border-stone-200 text-[#5c4033] py-3 px-4 pr-8 rounded-xl shadow-sm font-serif focus:outline-none focus:ring-2 focus:ring-[#5c4033]/20 hover:text-[#5c4033]  transition-all"
+                        >
+                            {tabs.map((tab) => (
+                                <option key={tab.id} value={tab.id}>
+                                    {tab.label}
+                                </option>
+                            ))}
+                        </select>
+                        {/* Icono de flecha personalizado para el select */}
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-[#5c4033]">
+                            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/center/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    {/* Vista Desktop: Botones Originales */}
+                    <div className="hidden md:inline-flex bg-white p-1 rounded-full shadow-md">
                         {tabs.map((tab) => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`px-6 py-2 rounded-full font-serif transition-all duration-300 ${
-                                    activeTab === tab.id
-                                    ? 'bg-[#5c4033] text-white shadow-lg'
-                                    : 'text-[#5c4033] hover:bg-stone-100'
-                                }`}
+                                className={`px-6 py-2 rounded-full font-serif transition-all duration-300 ${activeTab === tab.id
+                                        ? 'bg-[#5c4033] text-white shadow-lg'
+                                        : 'text-[#5c4033] hover:bg-stone-100'
+                                    }`}
                             >
                                 {tab.label}
                             </button>
@@ -355,11 +377,10 @@ const Services = () => {
                             whileInView="visible"
                             viewport={{ once: true, margin: "-50px" }}
                             custom={index}
-                            className={`relative bg-white rounded-2xl p-8 border transition-all duration-300 flex flex-col h-full hover:shadow-xl hover:-translate-y-1 ${
-                                service.isPopular
-                                ? 'border-amber-500 shadow-lg ring-1 ring-amber-500/20'
-                                : 'border-stone-200'
-                            }`}
+                            className={`relative bg-white rounded-2xl p-8 border transition-all duration-300 flex flex-col h-full hover:shadow-xl hover:-translate-y-1 ${service.isPopular
+                                    ? 'border-amber-500 shadow-lg ring-1 ring-amber-500/20'
+                                    : 'border-stone-200'
+                                }`}
                         >
                             {service.isPopular && (
                                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
@@ -450,11 +471,10 @@ const Services = () => {
                                 )}
                                 <a
                                     href="#contacto"
-                                    className={`block w-full py-3 rounded-lg font-medium transition-colors ${
-                                        service.isPopular
-                                        ? 'bg-[#5c4033] text-white hover:bg-[#4a332a]'
-                                        : 'bg-stone-100 text-[#5c4033] hover:bg-stone-200'
-                                    }`}
+                                    className={`block w-full py-3 rounded-lg font-medium transition-colors ${service.isPopular
+                                            ? 'bg-[#5c4033] text-white hover:bg-[#4a332a]'
+                                            : 'bg-stone-100 text-[#5c4033] hover:bg-stone-200'
+                                        }`}
                                 >
                                     {service.cta || 'Consultar ahora'}
                                 </a>
