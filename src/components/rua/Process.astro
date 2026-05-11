@@ -1,0 +1,34 @@
+---
+// src/components/Process.astro
+import ProcessAccordion from './ProcessAccordion.jsx';
+---
+
+<section id="proceso" class="bg-brown py-[clamp(80px,10vw,140px)] px-5 sm:px-10 lg:px-20"
+         aria-labelledby="process-heading">
+  <div class="max-w-content mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start">
+
+      <!-- Left: sticky heading -->
+      <div class="md:sticky md:top-[100px]">
+        <span class="section-label">Proceso</span>
+        <h2 id="process-heading" class="font-serif font-light leading-[1.1] text-cream mb-8"
+            style="font-size: clamp(36px,4.5vw,58px)">
+          Así es como<br />
+          <em class="text-gold italic">trabajamos</em><br />
+          juntos.
+        </h2>
+        <p class="font-sans text-[14px] leading-[1.8] text-cream/55 max-w-[340px]">
+          Un proceso claro, humano y colaborativo. Sabemos que confiar tu marca
+          a alguien es un acto de fe — lo tomamos muy en serio.
+        </p>
+        <div class="mt-14 ml-6 w-px h-40 bg-gradient-to-b from-gold/40 to-transparent hidden md:block"></div>
+      </div>
+
+      <!-- Right: accordion (React island) -->
+      <div>
+        <ProcessAccordion client:visible />
+      </div>
+
+    </div>
+  </div>
+</section>

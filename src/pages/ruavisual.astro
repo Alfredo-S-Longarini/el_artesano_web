@@ -1,0 +1,25 @@
+---
+// src/pages/ruavisual.astro
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/rua/Navbar.astro';
+import Hero from '../components/rua/Hero.astro';
+import Portfolio from '../components/rua/Portfolio.astro';
+import Process from '../components/rua/Process.astro';
+import Contact from '../components/rua/Contact.astro';
+import Footer from '../components/rua/Footer.astro';
+import LayoutRua from '../layouts/LayoutRua.astro';
+---
+
+<LayoutRua
+  title="RUA Visual · Diseño gráfico artesanal · El Artesano Web"
+  description="Logos, templates e infografías hechos a mano. Diseño gráfico para marcas que quieren comunicar con identidad. Argentina · Costa Rica."
+>
+  <Navbar />
+  <main>
+    <Hero />
+    <Portfolio />
+    <Process />
+    <Contact />
+  </main>
+  <Footer />
+</LayoutRua>

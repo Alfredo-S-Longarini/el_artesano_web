@@ -1,0 +1,99 @@
+---
+// src/components/Hero.astro
+export interface Props {
+  title?:   string;
+  tagline?: string;
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+const {
+  title   = 'Diseño que habla por vos.',
+  tagline = 'Creamos piezas gráficas que construyen marca, comunican con claridad y dejan huella. Cada proyecto, hecho a mano.',
+  ctaText = 'Ver Portafolio',
+  ctaHref = '#portafolio',
+} = Astro.props;
+
+const words    = title.trim().split(' ');
+const lastWord = words.pop();
+const restTitle = words.join(' ');
+
+const stats = [
+  // { number: '+80',   label: 'proyectos entregados' },
+  { number: '100%',  label: 'satisfacción garantizada' },
+  { number: '2',     label: 'países, un solo equipo' },
+];
+---
+
+<section class="relative min-h-screen bg-brown overflow-hidden flex flex-col justify-center" aria-label="Presentación RUA Visual">
+
+  <!-- Glow blobs -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+    <div class="absolute bottom-0 left-0 w-1/2 h-1/2 rounded-full blur-[80px] bg-[radial-gradient(circle,rgba(200,159,83,0.12)_0%,transparent_70%)]"></div>
+    <div class="absolute top-0 right-0 w-1/2 h-1/2 rounded-full blur-[80px] bg-[radial-gradient(circle,rgba(140,158,163,0.10)_0%,transparent_70%)]"></div>
+    <!-- Grid lines -->
+    <svg class="absolute right-0 top-0 h-full w-[45%] opacity-[0.06]" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid slice">
+      {Array.from({ length: 20 }).map((_, i) => (
+        <line x1={i * 22} y1="0" x2={i * 22} y2="600" stroke="#f4f1ea" stroke-width="1"/>
+      ))}
+      {Array.from({ length: 28 }).map((_, i) => (
+        <line x1="0" y1={i * 22} x2="400" y2={i * 22} stroke="#f4f1ea" stroke-width="1"/>
+      ))}
+    </svg>
+  </div>
+
+  <!-- Decorative circles -->
+  <div aria-hidden="true" class="hidden lg:flex absolute right-[8%] top-1/2 -translate-y-1/2 items-center justify-center"
+       style="width: clamp(220px,35vw,460px); height: clamp(220px,35vw,460px);">
+    <div class="w-full h-full rounded-full border border-gold/30 flex items-center justify-center">
+      <div class="w-[78%] h-[78%] rounded-full border border-gold/20 flex items-center justify-center">
+        <div class="w-[66%] h-[66%] rounded-full bg-gold/[0.07] flex items-center justify-center">
+          <svg viewBox="0 0 100 100" width="60%" height="60%">
+            <text x="50%" y="62%" text-anchor="middle" font-family="'Lora',Georgia,serif" font-size="68" font-weight="400" fill="rgba(200,159,83,0.5)">R</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 wrapper pt-[120px] pb-20 w-full">
+    <span class="section-label">Identidad · Templates · Infografías</span>
+
+    <h1 class="max-w-[640px] font-serif font-normal leading-[1.08] tracking-[-0.5px] text-cream mb-8 text-pretty"
+        style="font-size: clamp(48px,7vw,88px)">
+      {restTitle} <em class="text-gold italic">{lastWord}</em>
+    </h1>
+
+    <p class="font-sans font-light leading-[1.75] text-cream/65 mb-[52px] max-w-[480px] text-pretty"
+       style="font-size: clamp(15px,1.8vw,18px)">
+      {tagline}
+    </p>
+
+    <div class="flex flex-wrap gap-6 items-center">
+      <a href={ctaHref} class="btn-primary">{ctaText}</a>
+      <a href="#proceso" class="inline-flex items-center gap-2 font-sans text-[13px] tracking-[1px] text-cream/60 no-underline hover:text-cream/95 transition-colors duration-200">
+        Nuestro proceso
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="flex flex-wrap gap-10 mt-[72px] pt-10 border-t border-beige/20">
+      {stats.map(({ number, label }) => (
+        <div>
+          <p class="font-serif text-[38px] font-normal text-gold leading-none">{number}</p>
+          <p class="font-sans text-[12px] font-normal text-cream/45 tracking-[0.5px] mt-1">{label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div aria-hidden="true" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+    <span class="font-sans text-[10px] tracking-[3px] uppercase text-cream/30">Scroll</span>
+    <div class="w-px h-10 bg-linear-to-b from-gold/60 to-transparent"></div>
+  </div>
+</section>

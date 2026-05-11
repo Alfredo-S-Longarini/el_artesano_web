@@ -1,0 +1,412 @@
+---
+export interface Props {
+  href?: string;
+}
+
+const { href = '/ruavisual' } = Astro.props;
+---
+
+<section class="rva" aria-label="RUA Visual por El Artesano Web">
+
+  <!-- Ticker horizontal superior -->
+  <div class="rva-ticker" aria-hidden="true">
+    <div class="rva-ticker-track">
+      {Array(6).fill(null).map(() => (
+        <>
+          <span>Identidad visual</span>
+          <span class="rva-ticker-dot">✦</span>
+          <span>Templates Canva</span>
+          <span class="rva-ticker-dot">✦</span>
+          <span>Infografías</span>
+          <span class="rva-ticker-dot">✦</span>
+          <span>Contenido para redes</span>
+          <span class="rva-ticker-dot">✦</span>
+        </>
+      ))}
+    </div>
+  </div>
+
+  <!-- Cuerpo principal -->
+  <div class="rva-body">
+
+    <!-- Mitad izquierda: etiqueta + número editorial + CTA -->
+    <div class="rva-left">
+
+      <div class="rva-label-row">
+        <span class="rva-pill">Nuevo servicio</span>
+        <span class="rva-label-text">by El Artesano Web</span>
+      </div>
+
+      <div class="rva-logotype">
+        <span>R</span>
+        <span>U</span>
+        <span>A</span>
+      </div>
+
+      <p class="rva-sub">Visual</p>
+
+      <p class="rva-desc">
+        Piezas gráficas que construyen marca y comunican
+        con claridad. Cada proyecto, hecho a mano.
+      </p>
+
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rva-cta"
+      >
+        <span>Ver el estudio</span>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Divisor vertical -->
+    <div class="rva-divider" aria-hidden="true"></div>
+
+    <!-- Mitad derecha: panel oscuro con cita + servicios -->
+    <div class="rva-right">
+      <blockquote class="rva-quote">
+        "Tu idea merece<br/>
+        <em>diseño que la haga</em><br/>
+        inolvidable."
+      </blockquote>
+
+      <ul class="rva-services" aria-label="Servicios de RUA Visual">
+        <li>
+          <span class="rva-service-num">01</span>
+          <span class="rva-service-name">Identidad visual</span>
+        </li>
+        <li>
+          <span class="rva-service-num">02</span>
+          <span class="rva-service-name">Templates Canva</span>
+        </li>
+        <li>
+          <span class="rva-service-num">03</span>
+          <span class="rva-service-name">Infografías</span>
+        </li>
+        <li>
+          <span class="rva-service-num">04</span>
+          <span class="rva-service-name">Contenido para redes</span>
+        </li>
+      </ul>
+
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rva-cta-alt"
+      >
+        Abrí el estudio ↗
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+  .rva {
+    --cream:  #f4f1ea;
+    --brown:  #3b2718;
+    --gold:   #c89f53;
+    --beige:  #d3c5b5;
+    --warm:   #e8e0d0;
+
+    --serif:  'Lora', Georgia, serif;
+    --sans:   'Montserrat', sans-serif;
+
+    background: var(--cream);
+    overflow: hidden;
+    border-top: 1px solid var(--beige);
+    border-bottom: 1px solid var(--beige);
+  }
+
+  /* ── Ticker ─────────────────────────────────────────── */
+  .rva-ticker {
+    background: var(--brown);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0.65rem 0;
+  }
+
+  .rva-ticker-track {
+    display: inline-flex;
+    gap: 1.5rem;
+    animation: rva-scroll 28s linear infinite;
+    will-change: transform;
+  }
+
+  .rva-ticker-track span {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.85;
+  }
+
+  .rva-ticker-dot {
+    color: var(--gold) !important;
+    opacity: 1 !important;
+    font-size: 0.6rem !important;
+  }
+
+  @keyframes rva-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── Body principal ──────────────────────────────────── */
+  .rva-body {
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr;
+    min-height: 460px;
+  }
+
+  /* ── Izquierda ───────────────────────────────────────── */
+  .rva-left {
+    padding: 3.5rem 3rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .rva-label-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .rva-pill {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--brown);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+  }
+
+  .rva-label-text {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    color: var(--brown);
+    opacity: 0.45;
+    letter-spacing: 0.05em;
+  }
+
+  /* Logotipo editorial grande */
+  .rva-logotype {
+    display: flex;
+    align-items: baseline;
+    gap: 0.05em;
+    line-height: 1;
+    margin: 0.5rem 0 0;
+  }
+
+  .rva-logotype span {
+    font-family: var(--serif);
+    font-size: clamp(5rem, 11vw, 8.5rem);
+    font-weight: 700;
+    color: var(--brown);
+    line-height: 0.9;
+  }
+
+  .rva-sub {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0.5rem 0 1.25rem;
+  }
+
+  .rva-desc {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--brown);
+    opacity: 0.65;
+    max-width: 320px;
+    margin: 0 0 2rem;
+  }
+
+  .rva-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--cream);
+    background: var(--brown);
+    padding: 0.9rem 1.75rem;
+    align-self: flex-start;
+    transition: background 0.25s, gap 0.2s;
+  }
+
+  .rva-cta:hover {
+    background: #2a1a0e;
+    gap: 1rem;
+  }
+
+  /* ── Divisor ─────────────────────────────────────────── */
+  .rva-divider {
+    background: var(--beige);
+    margin: 2.5rem 0;
+  }
+
+  /* ── Derecha ─────────────────────────────────────────── */
+  .rva-right {
+    background: var(--brown);
+    padding: 3.5rem 3rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  /* Marca de agua decorativa */
+  .rva-right::before {
+    content: "RUA";
+    position: absolute;
+    bottom: -1rem;
+    right: -0.5rem;
+    font-family: var(--serif);
+    font-size: 9rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .rva-quote {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--cream);
+    margin: 0 0 2.5rem;
+    border: none;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .rva-quote em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  /* Lista de servicios */
+  .rva-services {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .rva-services li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .rva-service-num {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--gold);
+    opacity: 0.7;
+    min-width: 22px;
+  }
+
+  .rva-service-name {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--cream);
+    flex: 1;
+  }
+
+  .rva-service-arrow {
+    font-size: 1rem;
+    color: var(--gold);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .rva-services li:hover .rva-service-arrow {
+    opacity: 1;
+  }
+
+  .rva-cta-alt {
+    align-self: flex-end;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    color: var(--gold);
+    border-bottom: 1px solid rgba(200,159,83,0.4);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+    position: relative;
+    z-index: 1;
+  }
+
+  .rva-cta-alt:hover {
+    color: #d4a84e;
+    border-color: #d4a84e;
+  }
+
+  /* ── Responsive ──────────────────────────────────────── */
+  @media (max-width: 860px) {
+    .rva-body {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+
+    .rva-divider {
+      height: 1px;
+      width: auto;
+      margin: 0 2rem;
+    }
+
+    .rva-left,
+    .rva-right {
+      padding: 2.5rem 1.75rem;
+    }
+
+    .rva-logotype-r {
+      font-size: 5rem;
+    }
+
+    .rva-cta-alt {
+      align-self: flex-start;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .rva-left  { padding: 2rem 1.25rem; }
+    .rva-right { padding: 2rem 1.25rem; }
+  }
+</style>

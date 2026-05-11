@@ -1,0 +1,216 @@
+---
+// src/components/PortfolioCard.astro
+export interface Props {
+  category:    string;
+  title:       string;
+  description: string;
+  tags:        string[];
+  color?:      string;
+  aspect?:     string;
+  images?:     string[];   // hasta 5 imágenes
+  image?:      string;     // compatibilidad con prop anterior
+  href?:       string;
+}
+
+const {
+  category, title, description, tags,
+  color  = '#5c4033',
+  aspect = '4/3',
+  images: imagesProp,
+  image,
+  href   = '#',
+} = Astro.props;
+
+const images = imagesProp?.length ? imagesProp : image ? [image] : [];
+const hasImages  = images.length > 0;
+const isMultiple = images.length > 1;
+
+const themeMap: Record<string, { bg: string; stripe: string }> = {
+  '#5c4033': { bg: '#ede5df', stripe: '#c4b0a4' },
+  '#8c9ea3': { bg: '#dde5e7', stripe: '#b0bfc3' },
+  '#c89f53': { bg: '#f0e6ce', stripe: '#d4bc82' },
+};
+const theme = themeMap[color] ?? themeMap['#5c4033'];
+---
+
+<article
+  class="bg-white rounded-sm overflow-hidden
+         transition-all duration-300 ease-out
+         shadow-[0_4px_16px_rgba(92,64,51,0.07)]
+         md:hover:-translate-y-1.5
+         md:hover:shadow-[0_24px_48px_rgba(92,64,51,0.14)]
+         group"
+  data-carousel
+>
+
+  <!-- Image area -->
+  <div
+    class="relative overflow-hidden flex items-center justify-center"
+    style={`aspect-ratio: ${aspect}; background: ${theme.bg};`}
+  >
+
+    {hasImages ? (
+      <>
+        <!-- Slides: fade in/out con z-index -->
+        {images.map((src, i) => (
+          <div
+            class="absolute inset-0 transition-opacity duration-300"
+            data-slide
+            style={i === 0 ? 'opacity:1;z-index:1' : 'opacity:0;z-index:0'}
+          >
+            <img
+              src={src}
+              alt={`${title} - imagen ${i + 1}`}
+              loading="lazy"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        ))}
+
+        <!-- Overlay / link al proyecto -->
+        {/* <a
+          href={href}
+          aria-label={`Ver proyecto: ${title}`}
+          class="absolute inset-0 flex items-end justify-center pb-4
+                 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
+          style={`background: linear-gradient(to top, ${color}ee 0%, ${color}55 45%, transparent 70%); z-index:5`}
+        >
+          <span class="font-sans text-[12px] font-semibold tracking-[2px] uppercase text-cream drop-shadow-sm">
+            Ver proyecto →
+          </span>
+        </a> */}
+
+        {isMultiple && (
+          <>
+            <!-- Flecha anterior -->
+            <button
+              class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2
+                     w-7 h-7 rounded-full bg-black/40 text-white text-lg leading-none
+                     flex items-center justify-center
+                     md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200
+                     cursor-pointer"
+              style="z-index:10"
+              aria-label="Imagen anterior"
+            >‹</button>
+
+            <!-- Flecha siguiente -->
+            <button
+              class="carousel-next absolute right-2 top-1/2 -translate-y-1/2
+                     w-7 h-7 rounded-full bg-black/40 text-white text-lg leading-none
+                     flex items-center justify-center
+                     md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200
+                     cursor-pointer"
+              style="z-index:10"
+              aria-label="Imagen siguiente"
+            >›</button>
+
+            <!-- Puntos indicadores -->
+            <div
+              class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1.5"
+              style="z-index:10"
+            >
+              {images.map((_, i) => (
+                <button
+                  class="carousel-dot w-2 h-2 rounded-full bg-white transition-all duration-200 cursor-pointer"
+                  style={i === 0 ? 'opacity:1;transform:scale(1.25)' : 'opacity:0.4;transform:scale(1)'}
+                  data-idx={i}
+                  aria-label={`Imagen ${i + 1}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </>
+    ) : (
+      <>
+        <!-- Placeholder rayado -->
+        <a
+          href={href}
+          aria-label={`Ver proyecto: ${title}`}
+          class="absolute inset-0 flex items-end justify-center pb-4
+                 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
+          style={`background: linear-gradient(to top, ${color}ee 0%, ${color}55 45%, transparent 70%); z-index:5`}
+        >
+          <span class="font-sans text-[12px] font-semibold tracking-[2px] uppercase text-cream drop-shadow-sm">
+            Ver proyecto →
+          </span>
+        </a>
+
+        <svg
+          class="absolute inset-0 w-full h-full opacity-35"
+          viewBox="0 0 200 200"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+        >
+          {Array.from({ length: 20 }).map((_, i) => (
+            <line
+              x1={i * 14 - 50} y1="0"
+              x2={i * 14 + 50} y2="200"
+              stroke={theme.stripe}
+              stroke-width="8"
+            />
+          ))}
+        </svg>
+
+        <div class="relative text-center p-4 flex flex-col gap-1" style="z-index:2">
+          <span
+            class="font-sans text-[10px] tracking-[2px] uppercase opacity-70"
+            style={`color:${color}`}
+          >{category}</span>
+          <span
+            class="font-serif text-[13px] opacity-40"
+            style={`color:${color}`}
+          >[ imagen del proyecto ]</span>
+        </div>
+      </>
+    )}
+  </div>
+
+  <!-- Body -->
+  <div class="p-5 pb-6">
+    <span class="block font-sans text-[10px] font-semibold tracking-[2px] uppercase text-gold mb-2">
+      {category}
+    </span>
+    <h3 class="font-serif text-[22px] font-medium text-brown leading-[1.3] mb-2.5">{title}</h3>
+    <p class="font-sans text-[13px] text-brown/60 leading-relaxed mb-4">{description}</p>
+    <ul class="flex flex-wrap gap-2 list-none" aria-label="Etiquetas">
+      {tags.map(tag => (
+        <li class="font-sans text-[11px] font-medium tracking-[0.5px] bg-cream-2 text-brown px-2.5 py-1 rounded-sm">
+          {tag}
+        </li>
+      ))}
+    </ul>
+  </div>
+</article>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach(card => {
+    const slides = Array.from(card.querySelectorAll<HTMLElement>('[data-slide]'));
+    const dots   = Array.from(card.querySelectorAll<HTMLElement>('.carousel-dot'));
+    const prev   = card.querySelector<HTMLButtonElement>('.carousel-prev');
+    const next   = card.querySelector<HTMLButtonElement>('.carousel-next');
+
+    if (slides.length <= 1) return;
+
+    let current = 0;
+    const total = slides.length;
+
+    function goTo(index: number) {
+      slides[current].style.opacity = '0';
+      slides[current].style.zIndex  = '0';
+      dots[current].style.opacity   = '0.4';
+      dots[current].style.transform = 'scale(1)';
+
+      current = (index + total) % total;
+
+      slides[current].style.opacity = '1';
+      slides[current].style.zIndex  = '1';
+      dots[current].style.opacity   = '1';
+      dots[current].style.transform = 'scale(1.25)';
+    }
+
+    prev?.addEventListener('click', e => { e.preventDefault(); goTo(current - 1); });
+    next?.addEventListener('click', e => { e.preventDefault(); goTo(current + 1); });
+    dots.forEach((dot, i) => dot.addEventListener('click', e => { e.preventDefault(); goTo(i); }));
+  });
+</script>

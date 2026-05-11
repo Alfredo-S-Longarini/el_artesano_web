@@ -1,0 +1,55 @@
+---
+// src/components/Contact.astro
+import ContactForm from './ContactForm.jsx';
+
+const contactInfo = [
+  { label: 'Email',     value: 'elartesanoweb73@gmail.com', href: 'mailto:elartesanoweb73@gmail.com' },
+  { label: 'Instagram', value: '@elartesanoweb',            href: 'https://www.instagram.com/elartesanoweb', external: true },
+  { label: 'Whats App', value: '+506 8985 0193',            href: 'https://wa.me/50689850193',              external: true },
+];
+---
+
+<section id="contacto" class="bg-cream-2 py-[clamp(80px,10vw,140px)] px-5 sm:px-10 lg:px-20"
+         aria-labelledby="contact-heading">
+  <div class="max-w-content mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start">
+
+      <!-- Left: copy -->
+      <div>
+        <span class="section-label">Contacto</span>
+        <h2 id="contact-heading" class="font-serif font-normal leading-[1.1] text-brown mb-8"
+            style="font-size: clamp(36px,4.5vw,58px)">
+          ¿Tenés una idea?<br />
+          <em class="italic">Contanos.</em>
+        </h2>
+        <p class="font-sans text-[15px] leading-[1.8] text-brown/65 max-w-[380px] mb-12">
+          No importa si tu idea está tomando forma o lista para ejecutar. Hablamos,
+          entendemos y te decimos cómo podemos ayudarte.
+        </p>
+
+        <ul class="list-none flex flex-col gap-5">
+          {contactInfo.map(({ label, value, href, external }) => (
+            <li class="flex items-center gap-4">
+              <span class="font-sans text-[11px] font-semibold tracking-[2px] uppercase text-slate min-w-20">
+                {label}
+              </span>
+              <a
+                href={href}
+                class="font-sans text-[14px] text-brown/70 hover:text-brown transition-colors"
+                {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >
+                {value}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Right: form (React island) -->
+      <div class="bg-white p-8 lg:p-[52px] rounded-sm shadow-[0_4px_32px_rgba(92,64,51,0.07)]">
+        <ContactForm client:visible />
+      </div>
+
+    </div>
+  </div>
+</section>

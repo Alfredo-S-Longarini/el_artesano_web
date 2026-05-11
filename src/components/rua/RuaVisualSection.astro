@@ -1,0 +1,429 @@
+---
+// RuaVisualSection.astro
+// Sección promocional de RUA Visual para el home de El Artesano Web
+---
+
+<section class="rua-section" aria-label="RUA Visual - Diseño gráfico">
+
+  <!-- Fondo: grid + overlay decorativo -->
+  <div class="rua-grid-bg" aria-hidden="true"></div>
+
+  <!-- Círculo decorativo con la R -->
+  <div class="rua-deco" aria-hidden="true">
+    <svg viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="210" cy="210" r="200" stroke="currentColor" stroke-width="1" opacity="0.25"/>
+      <circle cx="210" cy="210" r="150" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
+      <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
+            font-family="'Lora', Georgia, serif" font-size="200" fill="currentColor" opacity="0.18">R</text>
+    </svg>
+  </div>
+
+  <div class="rua-inner">
+
+    <!-- Columna izquierda: contenido -->
+    <div class="rua-content">
+
+      <p class="rua-eyebrow">
+        <span>Identidad</span>
+        <span class="dot">·</span>
+        <span>Templates</span>
+        <span class="dot">·</span>
+        <span>Infografías</span>
+      </p>
+
+      <h2 class="rua-heading">
+        Diseño que<br/>
+        habla por <em>vos.</em>
+      </h2>
+
+      <p class="rua-body">
+        Creamos piezas gráficas que construyen marca,
+        comunican con claridad y dejan huella.
+        Cada proyecto, hecho a mano.
+      </p>
+
+      <div class="rua-cta-group">
+        <a
+          href="https://www.elartesanoweb.com/ruavisual"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rua-btn-primary"
+        >
+          Ver portafolio
+        </a>
+        <a
+          href="https://www.elartesanoweb.com/ruavisual"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rua-btn-ghost"
+        >
+          Conocer RUA Visual
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Columna derecha: tarjeta de muestra / identidad de marca -->
+    <div class="rua-card-side" aria-hidden="true">
+      <div class="rua-card">
+        <div class="rua-card-inner">
+          <span class="rua-card-brand">RUA</span>
+          <span class="rua-card-sub">VISUAL</span>
+          <p class="rua-card-tag">by El Artesano Web</p>
+          <div class="rua-card-divider"></div>
+          <ul class="rua-card-services">
+            <li>Identidad visual</li>
+            <li>Templates Canva</li>
+            <li>Infografías</li>
+            <li>Contenido para redes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Stats bar -->
+  <div class="rua-stats">
+    <div class="rua-stat">
+      <span class="rua-stat-num">100%</span>
+      <span class="rua-stat-label">Hecho a mano</span>
+    </div>
+    <div class="rua-stat-sep" aria-hidden="true"></div>
+    <div class="rua-stat">
+      <span class="rua-stat-num">Marca</span>
+      <span class="rua-stat-label">que deja huella</span>
+    </div>
+    <div class="rua-stat-sep" aria-hidden="true"></div>
+    <div class="rua-stat">
+      <span class="rua-stat-num">∞</span>
+      <span class="rua-stat-label">Posibilidades gráficas</span>
+    </div>
+  </div>
+
+</section>
+
+<style>
+  /* ─── Imports ──────────────────────────────────────────────── */
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&display=swap');
+
+  /* ─── Variables ────────────────────────────────────────────── */
+  .rua-section {
+    --rua-brown:   #5c4033;
+    --rua-brown2:  #4a3229;
+    --rua-gold:    #c89f53;
+    --rua-gold2:   #a07830;
+    --rua-cream:   #f4f1ea;
+    --rua-beige:   #d3c5b5;
+    --rua-white:   #ffffff;
+
+    --font-display: 'Lora', Georgia, serif;
+    --font-body:    'Montserrat', sans-serif;
+
+    position: relative;
+    overflow: hidden;
+    background-color: var(--rua-brown);
+    color: var(--rua-cream);
+    padding: 5rem 0 0;
+  }
+
+  /* ─── Grid background ──────────────────────────────────────── */
+  .rua-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── Círculo decorativo ───────────────────────────────────── */
+  .rua-deco {
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-55%);
+    width: 480px;
+    height: 480px;
+    color: var(--rua-gold);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.9;
+  }
+
+  /* ─── Layout interior ──────────────────────────────────────── */
+  .rua-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  /* ─── Contenido izquierdo ──────────────────────────────────── */
+  .rua-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rua-gold);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .rua-eyebrow .dot {
+    opacity: 0.6;
+  }
+
+  .rua-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--rua-white);
+    margin: 0 0 1.5rem;
+  }
+
+  .rua-heading em {
+    font-style: italic;
+    color: var(--rua-gold);
+  }
+
+  .rua-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--rua-beige);
+    max-width: 420px;
+    margin: 0 0 2.5rem;
+  }
+
+  /* ─── CTAs ─────────────────────────────────────────────────── */
+  .rua-cta-group {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .rua-btn-primary {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: var(--rua-gold);
+    color: var(--rua-brown2);
+    padding: 1rem 2rem;
+    transition: background 0.25s ease, transform 0.2s ease;
+  }
+
+  .rua-btn-primary:hover {
+    background: #d4a84e;
+    transform: translateY(-2px);
+  }
+
+  .rua-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--rua-cream);
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+
+  .rua-btn-ghost:hover {
+    color: var(--rua-gold);
+    gap: 0.75rem;
+  }
+
+  /* ─── Tarjeta lateral ──────────────────────────────────────── */
+  .rua-card-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .rua-card {
+    width: 300px;
+    border: 1px solid rgba(200, 159, 83, 0.3);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(4px);
+    padding: 2.5rem 2rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .rua-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(200, 159, 83, 0.6);
+  }
+
+  .rua-card-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .rua-card-brand {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--rua-white);
+    line-height: 1;
+    letter-spacing: 0.05em;
+  }
+
+  .rua-card-sub {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    color: var(--rua-gold);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+
+  .rua-card-tag {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    color: var(--rua-beige);
+    opacity: 0.7;
+    margin: 0 0 1.25rem;
+  }
+
+  .rua-card-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(200, 159, 83, 0.25);
+    margin-bottom: 1.25rem;
+  }
+
+  .rua-card-services {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .rua-card-services li {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--rua-beige);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .rua-card-services li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--rua-gold);
+    font-size: 0.75rem;
+  }
+
+  /* ─── Stats bar ─────────────────────────────────────────────── */
+  .rua-stats {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: stretch;
+    max-width: 100%;
+  }
+
+  .rua-stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1.75rem 2rem;
+  }
+
+  .rua-stat-num {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--rua-gold);
+    line-height: 1;
+  }
+
+  .rua-stat-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--rua-beige);
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+  }
+
+  .rua-stat-sep {
+    width: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 1rem 0;
+  }
+
+  /* ─── Responsive ────────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .rua-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .rua-deco {
+      right: -120px;
+      top: 10%;
+      transform: none;
+      width: 320px;
+      height: 320px;
+      opacity: 0.5;
+    }
+
+    .rua-card {
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .rua-stats {
+      flex-direction: column;
+    }
+
+    .rua-stat-sep {
+      width: auto;
+      height: 1px;
+      margin: 0 2rem;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .rua-section {
+      padding-top: 3rem;
+    }
+
+    .rua-heading {
+      font-size: 2.25rem;
+    }
+
+    .rua-cta-group {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
