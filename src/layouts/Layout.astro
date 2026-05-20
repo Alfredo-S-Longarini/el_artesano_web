@@ -5,6 +5,7 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  lang?: "es" | "en";
 }
 
 const {
@@ -12,13 +13,18 @@ const {
   // Descripción optimizada con keywords geográficas sutiles
   description = "Desarrollador Web Freelance experto en Astro y React. Diseño sitios web rápidos y a medida para clientes en Argentina, Costa Rica y el mundo. Consultoría SEO y desarrollo frontend.",
   image = "/img/og-image.webp",
+  lang = "es",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// hreflang alternates: apunta siempre a las raíces ES y EN
+const hreflangEs = new URL("/", Astro.site);
+const hreflangEn = new URL("/en/", Astro.site);
 ---
 
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -29,6 +35,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+
+    {/* --- HREFLANG (SEO multilingüe) --- */}
+    <link rel="alternate" hreflang="es" href={hreflangEs} />
+    <link rel="alternate" hreflang="en" href={hreflangEn} />
+    <link rel="alternate" hreflang="x-default" href={hreflangEs} />
 
     {/* Robots: Importante para permitir indexación global */}
     <meta name="robots" content="index, follow" />
@@ -85,7 +96,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           { "@type": "Country", name: "Argentina" },
           { "@type": "Country", name: "Costa Rica" },
           { "@type": "Country", name: "United States" }, // Opcional
-          { "@type": "contentLocation", name: "Mundial" }, // Servicio Remoto
+          { "@type": "Place", name: "World" }, // Servicio Remoto
         ],
 
         // HABILIDADES (Keywords técnicas)
