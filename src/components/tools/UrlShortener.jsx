@@ -25,7 +25,7 @@ export default function UrlShortener() {
             const result = await response.text();
             setShortUrl(result);
         } catch (err) {
-            setError('Error en la forja del enlace. Intenta de nuevo.');
+            setError('Error en la forja del enlace. Probá de nuevo.');
         } finally {
             setLoading(false);
         }
@@ -59,7 +59,7 @@ export default function UrlShortener() {
                                 </div>
                                 <input
                                     type="url"
-                                    placeholder="Pega la URL larga aquí..."
+                                    placeholder="Pegá la URL larga acá..."
                                     value={longUrl}
                                     onChange={(e) => setLongUrl(e.target.value)}
                                     className="w-full bg-[#1a1510] border border-white/10 rounded-xl pl-14 pr-6 py-5 text-[#EFEFEF] focus:outline-none focus:border-amber-500/50 focus:ring-4 focus:ring-amber-500/5 transition-all duration-300 placeholder:text-stone-700 font-mono text-sm"

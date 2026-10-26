@@ -1,0 +1,64 @@
+/* src/styles/base.css
+   Hoja global del sistema de diseño nuevo (BaseLayout). Las páginas actuales siguen con
+   global.css y globalRua.css hasta migrarlas en la Fase 2. */
+@import "tailwindcss";
+@import "./tokens.css";
+
+/* RUA Visual: mismo sistema, fondo crema */
+[data-brand="rua"] {
+  --color-bg: var(--color-cream);
+  --color-surface: var(--color-cream-200);
+  --color-fg: var(--color-brown);
+  --color-muted: #6f5a4e;
+  --color-line: var(--color-beige);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-fg font-sans antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif text-balance;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold;
+  }
+
+  ::selection {
+    @apply bg-gold text-ink-900;
+  }
+}
+
+@layer components {
+  .container-content {
+    @apply mx-auto w-full max-w-content px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Aparición suave al hacer scroll (lo activa el script de BaseLayout) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.active {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

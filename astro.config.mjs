@@ -14,7 +14,11 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   output: 'server',
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    // El prototipo de la nueva home no se indexa
+    sitemap({ filter: (page) => !page.includes('/prototipo') }),
+  ],
   adapter: vercel({
     webAnalytics: { enabled: true },
   })

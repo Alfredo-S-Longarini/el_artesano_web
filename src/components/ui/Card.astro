@@ -1,0 +1,25 @@
+---
+// Superficie para servicios, proyectos y utilidades. Con href toda la tarjeta es un enlace.
+interface Props {
+  href?: string;
+  featured?: boolean;
+  flush?: boolean; // sin padding interno, para tarjetas con imagen a sangre
+  class?: string;
+}
+
+const { href, featured = false, flush = false, class: className } = Astro.props;
+const Tag = href ? "a" : "div";
+---
+
+<Tag
+  href={href}
+  class:list={[
+    "group relative flex h-full flex-col rounded-card border bg-surface transition-colors duration-300",
+    !flush && "p-6 md:p-8",
+    featured ? "border-gold/70" : "border-line",
+    href && "hover:border-gold/60",
+    className,
+  ]}
+>
+  <slot />
+</Tag>

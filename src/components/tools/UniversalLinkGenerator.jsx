@@ -151,7 +151,7 @@ export default function UniversalLinkGenerator() {
                                 <label className="text-[11px] uppercase tracking-[0.2em] text-stone-500 font-bold ml-1">Mensaje Predeterminado</label>
                                 <textarea
                                     rows="4"
-                                    placeholder="Escribe el contenido aquí..."
+                                    placeholder="Escribí el contenido acá..."
                                     value={message}
                                     onChange={(e) => setMessage(e.target.value)}
                                     className="w-full bg-[#1a1510] border border-white/10 rounded-xl px-5 py-4 text-[#EFEFEF] focus:outline-none focus:border-amber-500/50 transition-all resize-none placeholder:text-stone-700"

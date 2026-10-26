@@ -1,0 +1,32 @@
+---
+// Botón del sistema de diseño. Con href renderiza <a>, sin href un <button>.
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"a"> &
+  HTMLAttributes<"button"> & {
+    variant?: "primary" | "secondary" | "ghost";
+    size?: "md" | "lg";
+    href?: string;
+  };
+
+const { variant = "primary", size = "md", href, class: className, ...rest } = Astro.props;
+
+const variants = {
+  primary: "bg-gold text-ink-900 hover:bg-gold-300 shadow-[0_8px_24px_-8px_rgba(200,159,83,0.55)]",
+  secondary: "border border-gold/60 text-gold hover:bg-gold hover:text-ink-900",
+  ghost: "text-fg underline decoration-gold/40 underline-offset-4 hover:text-gold hover:decoration-gold",
+};
+const sizes = {
+  md: "px-5 py-2.5 text-sm",
+  lg: "px-7 py-3.5 text-base",
+};
+const classes = [
+  "inline-flex items-center justify-center gap-2 rounded-btn font-sans font-semibold transition-colors duration-200",
+  variant !== "ghost" && sizes[size],
+  variants[variant],
+  className,
+];
+const Tag = href ? "a" : "button";
+---
+
+<Tag href={href} class:list={classes} {...rest}><slot /></Tag>
