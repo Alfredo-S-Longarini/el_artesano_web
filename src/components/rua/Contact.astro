@@ -1,11 +1,12 @@
 ---
 // src/components/Contact.astro
 import ContactForm from './ContactForm.jsx';
+import { EMAIL, WHATSAPP_DISPLAY, WHATSAPP_URL } from '../../config/contact.js';
 
 const contactInfo = [
-  { label: 'Email',     value: 'elartesanoweb73@gmail.com', href: 'mailto:elartesanoweb73@gmail.com' },
+  { label: 'Email',     value: EMAIL,                       href: `mailto:${EMAIL}` },
   { label: 'Instagram', value: '@elartesanoweb',            href: 'https://www.instagram.com/elartesanoweb', external: true },
-  { label: 'Whats App', value: '+506 8985 0193',            href: 'https://wa.me/50689850193',              external: true },
+  { label: 'WhatsApp',  value: WHATSAPP_DISPLAY,            href: WHATSAPP_URL,                             external: true },
 ];
 ---
 

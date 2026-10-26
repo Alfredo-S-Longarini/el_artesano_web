@@ -146,7 +146,7 @@ const Services = () => {
             title: "Puesta a Punto Esencial",
             desc: "Para quienes necesitan que todo funcione, sin sorpresas. Tu web siempre protegida, sin que tengas que pensar en ello.",
             content: [
-                "Actualizaciones mensuales del sistema, plugins y temas.",
+                "Actualizaciones mensuales del framework y las dependencias del sitio.",
                 "Copias de seguridad semanales (backups).",
                 "Escaneos de seguridad para prevenir malware.",
                 "Monitorización de uptime (verificar que la web no se caiga).",

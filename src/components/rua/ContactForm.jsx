@@ -1,5 +1,6 @@
 // src/components/ContactForm.jsx
 import { useState } from 'react';
+import { trackEvent } from '../../lib/track.js';
 
 const SERVICES = [
   { value: '',           label: '¿En qué podemos ayudarte?' },
@@ -18,6 +19,7 @@ function validate(field, value) {
 
 export default function ContactForm() {
   const [form,     setForm]     = useState({ nombre: '', email: '', servicio: '', mensaje: '' });
+  const [website,  setWebsite]  = useState(''); // honeypot anti-spam
   const [touched,  setTouched]  = useState({});
   const [status,   setStatus]   = useState('idle'); // idle | sending | done | error
   const [ticketId, setTicketId] = useState(null);
@@ -40,6 +42,7 @@ export default function ContactForm() {
           email:   form.email,
           subject: form.servicio,
           message: form.mensaje,
+          website,
         }),
       });
 
@@ -47,6 +50,7 @@ export default function ContactForm() {
         const data = await response.json();
         setTicketId(data.id);
         setStatus('done');
+        trackEvent('Formulario enviado', { origen: 'ruavisual', interes: form.servicio });
         setForm({ nombre: '', email: '', servicio: '', mensaje: '' });
       } else {
         setStatus('error');
@@ -82,6 +86,11 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate>
+      {/* Honeypot: invisible para personas, los bots lo completan */}
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="rua-website">No completar este campo</label>
+        <input type="text" id="rua-website" name="website" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
+      </div>
       {/* Nombre + Email */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6">
         {[

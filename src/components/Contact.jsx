@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { EMAIL, WHATSAPP_DISPLAY, WHATSAPP_URL } from '../config/contact.js';
+import { trackEvent } from '../lib/track.js';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        subject: '', // Valor por defecto
-        message: ''
+        subject: '',
+        message: '',
+        website: '' // honeypot anti-spam, oculto para personas
     });
 
     const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
@@ -35,7 +38,8 @@ const Contact = () => {
                 const data = await response.json(); // Leemos la respuesta de la API
                 setStatus('success');
                 setTicketId(data.id); // Guardamos el ID que nos devolvió el servidor
-                setFormData({ name: '', email: '', subject: '', message: '' });
+                trackEvent('Formulario enviado', { origen: 'home', interes: formData.subject || 'Sin especificar' });
+                setFormData({ name: '', email: '', subject: '', message: '', website: '' });
             } else {
                 setStatus('error');
             }
@@ -67,8 +71,19 @@ const Contact = () => {
                                 <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-amber-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
                                 </div>
-                                <span>elartesanoweb73@gmail.com</span>
+                                <a href={`mailto:${EMAIL}`} className="hover:text-amber-500 transition-colors">{EMAIL}</a>
                             </div>
+                            <a
+                                href={WHATSAPP_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center space-x-4 text-[#EFEFEF] hover:text-amber-500 transition-colors"
+                            >
+                                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-amber-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zM12.04 21.5h-.01a9.45 9.45 0 0 1-4.82-1.32l-.35-.21-3.58.94.96-3.49-.23-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.22 4.25-9.46 9.48-9.46a9.4 9.4 0 0 1 6.7 2.78 9.4 9.4 0 0 1 2.77 6.7c0 5.22-4.25 9.46-9.47 9.46zm8.05-17.52A11.32 11.32 0 0 0 12.04.65C5.77.65.67 5.75.67 12.01c0 2 .52 3.96 1.52 5.68L.57 23.65l6.1-1.6a11.36 11.36 0 0 0 5.37 1.37h.01c6.27 0 11.37-5.1 11.37-11.37 0-3.04-1.18-5.89-3.33-8.04z"/></svg>
+                                </div>
+                                <span>{WHATSAPP_DISPLAY}</span>
+                            </a>
                             <div className="flex items-center space-x-4 text-[#EFEFEF]">
                                 <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-amber-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>
@@ -122,13 +137,30 @@ const Contact = () => {
                                     onChange={handleChange}
                                     className="w-full bg-[#1a1510] border border-white/10 rounded-lg px-4 py-3 placeholder-[#bbbbbb] text-[#EFEFEF] focus:outline-none focus:border-amber-500 transition-colors appearance-none"
                                 >
-                                    <option value="Presupuesto Web - 1">Engranaje Esencial</option>
-                                    <option value="Presupuesto Web - 2">Mecanismo Completo</option>
-                                    <option value="Presupuesto Web - 3">Cronógrafo a Medida</option>
-                                    <option value="Presupuesto Mant - 1">Puesta a Punto Esencial</option>
-                                    <option value="Presupuesto Mant - 2">Soporte prioritario</option>
-                                    <option value="Otras Consultas">Otras Consultas</option>
+                                    <option value="">Elegí una opción</option>
+                                    <optgroup label="Desarrollo web">
+                                        <option value="Desarrollo - Engranaje Esencial">Engranaje Esencial</option>
+                                        <option value="Desarrollo - Mecanismo Completo">Mecanismo Completo</option>
+                                        <option value="Desarrollo - Cronógrafo a Medida">Cronógrafo a Medida</option>
+                                    </optgroup>
+                                    <optgroup label="Mantenimiento">
+                                        <option value="Mantenimiento - Puesta a Punto Esencial">Puesta a Punto Esencial</option>
+                                        <option value="Mantenimiento - Soporte Prioritario">Soporte Prioritario</option>
+                                        <option value="Mantenimiento - Taller Completo">Mantenimiento Taller Completo</option>
+                                    </optgroup>
+                                    <optgroup label="Otros servicios">
+                                        <option value="Otros - Revisión y Ajuste">Revisión y Ajuste (rediseño / migración)</option>
+                                        <option value="Otros - Auditoría del Taller Digital">Auditoría del Taller Digital (consultoría SEO)</option>
+                                        <option value="Otros - Tienda Artesanal">Tienda Artesanal (e-commerce)</option>
+                                    </optgroup>
+                                    <option value="Otras Consultas">Otras consultas</option>
                                 </select>
+                            </div>
+
+                            {/* Honeypot: invisible para personas, los bots lo completan */}
+                            <div className="hidden" aria-hidden="true">
+                                <label htmlFor="website">No completar este campo</label>
+                                <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" value={formData.website} onChange={handleChange} />
                             </div>
 
                             {/* Mensaje */}
