@@ -5,10 +5,10 @@ const Footer = () => {
 
     const links = [
         { name: 'Inicio', href: '/' },
-        { name: 'Mi Taller', href: '#taller' },
-        { name: 'Proyectos', href: '#proyectos' },
-        { name: 'Servicios', href: '#servicios' },
-        { name: 'Contacto', href: '#contacto' },
+        { name: 'Mi Taller', href: '/#taller' },
+        { name: 'Proyectos', href: '/#proyectos' },
+        { name: 'Servicios', href: '/#servicios' },
+        { name: 'Contacto', href: '/#contacto' },
     ];
 
     return (
