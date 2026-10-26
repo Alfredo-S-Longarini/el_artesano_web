@@ -1,0 +1,139 @@
+---
+// Layout base único del sistema de diseño nuevo. Sirve a las dos marcas:
+// brand="artesano" (tema madera oscuro) y brand="rua" (RUA Visual, fondo crema).
+// Las páginas actuales migran a este layout en la Fase 2.
+import "../styles/base.css";
+import { EMAIL, WHATSAPP_DISPLAY } from "../config/contact.js";
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  brand?: "artesano" | "rua";
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = "Desarrollo web a medida en Argentina y Costa Rica: sitios rápidos, con precio claro y acompañamiento después del lanzamiento.",
+  image = "/img/og-image.webp",
+  brand = "artesano",
+  noindex = false,
+} = Astro.props;
+
+const site = Astro.site ?? new URL("https://www.elartesanoweb.com");
+const canonicalURL = new URL(Astro.url.pathname, site);
+const ogImage = new URL(image, site);
+const isRua = brand === "rua";
+const favicon = isRua ? "/img/faviconRua" : "/img/favicon";
+
+const provider = {
+  "@type": "ProfessionalService",
+  name: "El Artesano Web",
+  url: site,
+  email: EMAIL,
+  telephone: WHATSAPP_DISPLAY,
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "AR",
+    addressRegion: "Río Negro",
+    addressLocality: "Cipolletti",
+  },
+  areaServed: ["Argentina", "Costa Rica"],
+  sameAs: [
+    "https://github.com/Alfredo-S-Longarini",
+    "https://www.linkedin.com/in/alfredo-s-longarini/",
+    "https://www.instagram.com/elartesanoweb/",
+  ],
+};
+
+const jsonLd = isRua
+  ? {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      name: "RUA Visual",
+      description,
+      url: canonicalURL,
+      image: ogImage,
+      provider,
+      serviceType: ["Diseño gráfico", "Identidad de marca", "Logotipos", "Infografías"],
+    }
+  : { "@context": "https://schema.org", ...provider, description, image: ogImage };
+---
+
+<!doctype html>
+<html lang="es" data-brand={brand}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content={isRua ? "#f4f1ea" : "#1a1510"} />
+    <link rel="icon" type="image/png" sizes="48x48" href={`${favicon}-48.png`} />
+    <link rel="apple-touch-icon" href={`${favicon}-180.png`} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+    <meta name="author" content="Alfredo Sobarzo Longarini" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content={isRua ? "RUA Visual · El Artesano Web" : "El Artesano Web"} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="min-h-screen">
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-btn focus:bg-gold focus:px-4 focus:py-2 focus:text-ink-900"
+    >
+      Saltar al contenido
+    </a>
+    <slot />
+
+    <script>
+      // Aparición suave de los bloques .reveal al entrar en pantalla
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+      // Eventos de conversión (Vercel Web Analytics): clics en WhatsApp y en CTAs hacia el contacto
+      document.addEventListener("click", (event) => {
+        const link = (event.target as HTMLElement | null)?.closest("a");
+        const va = (window as any).va;
+        if (!link || typeof va !== "function") return;
+        const href = link.getAttribute("href") ?? "";
+        const label = (link.textContent ?? "").trim().slice(0, 60);
+        if (href.startsWith("https://wa.me/")) {
+          va("event", { name: "Clic WhatsApp", data: { pagina: location.pathname } });
+        } else if (href.endsWith("#contacto")) {
+          va("event", { name: "Clic CTA contacto", data: { pagina: location.pathname, cta: label } });
+        }
+      });
+    </script>
+  </body>
+</html>

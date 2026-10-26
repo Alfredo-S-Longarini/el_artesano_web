@@ -1,0 +1,42 @@
+/* src/styles/tokens.css
+   Tokens de diseño compartidos por El Artesano Web y RUA Visual.
+   Se importan después de "tailwindcss" para generar utilidades (bg-ink-900, text-gold, font-serif...). */
+
+@theme {
+  /* ── Paleta base ── */
+  --color-ink-950: #140f0c;
+  --color-ink-900: #1a1510;
+  --color-ink-800: #231e19;
+  --color-ink-700: #2f2820;
+  --color-wood: #2c241b;
+  --color-paper: #efefef;
+
+  --color-brown: #5c4033;
+  --color-brown-700: #4e342e;
+
+  --color-gold: #c89f53;
+  --color-gold-600: #b58f4a;
+  --color-gold-300: #e2c99a;
+
+  --color-cream: #f4f1ea;
+  --color-cream-200: #ebe5d9;
+  --color-beige: #d3c5b5;
+  --color-steel: #8c9ea3;
+
+  /* ── Colores semánticos: cambian según la marca (ver base.css) ── */
+  --color-bg: var(--color-ink-900);
+  --color-surface: var(--color-ink-800);
+  --color-fg: var(--color-paper);
+  --color-muted: #b8b0a6;
+  --color-line: #3a3128;
+  --color-accent: var(--color-gold);
+
+  /* ── Tipografía ── */
+  --font-serif: "Lora", Georgia, serif;
+  --font-sans: "Montserrat", system-ui, sans-serif;
+
+  /* ── Forma y medida ── */
+  --radius-card: 1rem;
+  --radius-btn: 0.5rem;
+  --container-content: 76rem;
+}

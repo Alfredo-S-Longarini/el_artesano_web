@@ -1,0 +1,38 @@
+---
+// Campo de formulario accesible: label, control y texto de ayuda o error.
+interface Props {
+  name: string;
+  label: string;
+  type?: "text" | "email" | "tel" | "textarea" | "select";
+  required?: boolean;
+  placeholder?: string;
+  hint?: string;
+  rows?: number;
+  autocomplete?: string;
+}
+
+const { name, label, type = "text", required = false, placeholder, hint, rows = 4, autocomplete } = Astro.props;
+const id = `campo-${name}`;
+const hintId = hint ? `${id}-ayuda` : undefined;
+const control =
+  "w-full rounded-btn border border-line bg-bg px-4 py-3 text-fg placeholder:text-muted/70 transition-colors focus:border-gold focus:outline-none";
+---
+
+<div class="space-y-2">
+  <label for={id} class="block text-sm font-medium text-fg">
+    {label}
+    {!required && <span class="font-normal text-muted"> (opcional)</span>}
+  </label>
+  {
+    type === "textarea" ? (
+      <textarea id={id} name={name} rows={rows} required={required} placeholder={placeholder} aria-describedby={hintId} class:list={[control, "resize-y"]} />
+    ) : type === "select" ? (
+      <select id={id} name={name} required={required} aria-describedby={hintId} class:list={[control, "appearance-none"]}>
+        <slot />
+      </select>
+    ) : (
+      <input id={id} name={name} type={type} required={required} placeholder={placeholder} autocomplete={autocomplete} aria-describedby={hintId} class={control} />
+    )
+  }
+  {hint && <p id={hintId} class="text-xs text-muted">{hint}</p>}
+</div>

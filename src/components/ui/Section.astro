@@ -1,0 +1,21 @@
+---
+// Sección de página con ancho máximo y espaciado vertical consistentes.
+interface Props {
+  id?: string;
+  tone?: "base" | "surface" | "wood";
+  class?: string;
+  labelledby?: string;
+}
+
+const { id, tone = "base", class: className, labelledby } = Astro.props;
+
+const tones = {
+  base: "bg-bg",
+  surface: "bg-surface",
+  wood: "bg-wood",
+};
+---
+
+<section id={id} aria-labelledby={labelledby} class:list={["py-20 md:py-28", tones[tone], className]}>
+  <div class="container-content"><slot /></div>
+</section>

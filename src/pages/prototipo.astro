@@ -1,0 +1,375 @@
+---
+// Prototipo de la nueva home (Fase 1). No se indexa ni aparece en el sitemap:
+// sirve para validar el sistema de diseño antes de reemplazar la home en la Fase 2.
+export const prerender = true;
+
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/ui/Button.astro";
+import Section from "../components/ui/Section.astro";
+import SectionHeading from "../components/ui/SectionHeading.astro";
+import Card from "../components/ui/Card.astro";
+import Field from "../components/ui/Field.astro";
+import WhatsAppButton from "../components/ui/WhatsAppButton.astro";
+import { EMAIL, WHATSAPP_DISPLAY, WHATSAPP_URL } from "../config/contact.js";
+
+import woodBg from "../assets/wood-bg.webp";
+import characterImg from "../assets/character.webp";
+import imagePw1 from "../assets/proyectos/pw-1.webp";
+import imagePw2 from "../assets/proyectos/pw-2.webp";
+
+const nav = [
+  { label: "Servicios", href: "#servicios" },
+  { label: "Proceso", href: "#proceso" },
+  { label: "Proyectos", href: "#proyectos" },
+  { label: "Preguntas", href: "#preguntas" },
+];
+
+const trust = [
+  "Precios publicados en USD, ARS y CRC",
+  "Sitios rápidos y optimizados para Google",
+  "Trato directo, sin intermediarios",
+  "Acompañamiento después del lanzamiento",
+];
+
+const services = [
+  {
+    name: "Engranaje Esencial",
+    summary: "Tu primera web profesional: hasta 3 páginas, formulario y Google Search Console.",
+    price: "desde USD 350",
+    time: "2–3 semanas",
+    featured: false,
+  },
+  {
+    name: "Mecanismo Completo",
+    summary: "Hasta 6 páginas y una funcionalidad clave: blog, galería o turnos. SEO y velocidad incluidos.",
+    price: "desde USD 650",
+    time: "4–6 semanas",
+    featured: true,
+  },
+  {
+    name: "Cronógrafo a Medida",
+    summary: "Proyectos grandes: catálogo, reservas o varios idiomas, con capacitación para tu equipo.",
+    price: "desde USD 1.500",
+    time: "8–14 semanas",
+    featured: false,
+  },
+];
+
+const steps = [
+  { title: "Charla inicial", text: "Me contás qué necesitás y te digo si puedo ayudarte. Sin costo." },
+  { title: "Propuesta", text: "Recibís alcance, precio y fechas por escrito." },
+  { title: "Diseño", text: "Ves el diseño antes de programar y lo ajustamos juntos." },
+  { title: "Desarrollo", text: "Construyo el sitio y te muestro los avances." },
+  { title: "Lanzamiento y soporte", text: "Publicamos, conectamos Google y quedo disponible para lo que venga." },
+];
+
+const projects = [
+  {
+    title: "Con Esencia a Mau",
+    sector: "Pastelería",
+    summary: "Sitio y sistema de pedidos online para una pastelería artesanal.",
+    image: imagePw1,
+    href: "https://www.conesenciaamau.com/",
+  },
+  {
+    title: "CAPEAC",
+    sector: "Cámara empresaria",
+    summary: "Portal institucional con plataforma de gestión interna para la Cámara Patagónica de Autotransporte de Cargas.",
+    image: imagePw2,
+    href: "https://www.capeac.org.ar/",
+  },
+];
+
+const faqs = [
+  {
+    q: "¿Qué pasa después de publicar?",
+    a: "Podés sumar un plan de mantenimiento mensual desde USD 60: actualizaciones, backups, monitoreo y horas para cambios.",
+  },
+  {
+    q: "¿Trabajás con clientes fuera de Argentina?",
+    a: "Sí, trabajo en remoto con clientes de Argentina y Costa Rica. Los precios se muestran en USD, ARS y CRC.",
+  },
+  {
+    q: "¿Cuánto tarda un sitio?",
+    a: "Entre 2 y 14 semanas según el alcance. Cada paquete indica su plazo estimado.",
+  },
+];
+---
+
+<BaseLayout
+  title="Prototipo · El Artesano Web"
+  description="Prototipo de la nueva home de El Artesano Web."
+  noindex
+>
+  <header class="absolute inset-x-0 top-0 z-40">
+    <div class="container-content flex items-center justify-between py-5">
+      <a href="/prototipo" class="flex items-center gap-2 font-serif text-xl text-paper">
+        <span class="text-gold" aria-hidden="true">⚙</span> El Artesano Web
+      </a>
+      <nav aria-label="Principal" class="hidden items-center gap-8 md:flex">
+        {nav.map((item) => <a href={item.href} class="text-sm font-medium text-paper/80 transition-colors hover:text-gold">{item.label}</a>)}
+        <Button href="#contacto" size="md">Empezá tu proyecto</Button>
+      </nav>
+      <Button href="#contacto" size="md" class="md:hidden">Contacto</Button>
+    </div>
+  </header>
+
+  <main id="contenido">
+    {/* HERO */}
+    <section class="relative overflow-hidden bg-wood" aria-labelledby="hero-titulo">
+      <Image
+        src={woodBg}
+        alt=""
+        widths={[768, 1280, 1920, 2400]}
+        sizes="100vw"
+        quality={70}
+        loading="eager"
+        fetchpriority="high"
+        class="absolute inset-0 h-full w-full object-cover opacity-50"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-ink-900/30 via-ink-900/50 to-ink-900"></div>
+      <div class="container-content relative grid items-end gap-10 pt-32 md:grid-cols-[1.2fr_1fr] md:pt-40">
+        <div class="pb-16 md:pb-24">
+          <p class="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-gold">Desarrollo web artesanal · Argentina y Costa Rica</p>
+          <h1 id="hero-titulo" class="text-4xl font-semibold leading-[1.1] text-paper md:text-5xl lg:text-6xl">
+            Tu web, hecha a mano para que te encuentren y te escriban.
+          </h1>
+          <p class="mt-6 max-w-xl text-lg leading-relaxed text-paper/80">
+            Diseño y programo sitios rápidos, con precio claro desde el primer día y alguien que te acompaña después del lanzamiento.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button href="#contacto" size="lg">Empezá tu proyecto</Button>
+            <Button href="#servicios" size="lg" variant="secondary">Ver servicios y precios</Button>
+          </div>
+        </div>
+        <div class="flex justify-center md:justify-end">
+          <Image src={characterImg} alt="Ilustración del artesano trabajando en su taller digital" class="w-2/3 max-w-sm drop-shadow-2xl md:w-full" loading="eager" />
+        </div>
+      </div>
+    </section>
+
+    {/* FRANJA DE CONFIANZA */}
+    <div class="border-y border-line bg-ink-950">
+      <ul class="container-content grid gap-4 py-6 text-sm text-muted sm:grid-cols-2 lg:grid-cols-4">
+        {
+          trust.map((item) => (
+            <li class="flex items-center gap-3">
+              <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true" />
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    {/* SERVICIOS */}
+    <Section id="servicios" labelledby="servicios-titulo">
+      <SectionHeading
+        id="servicios-titulo"
+        eyebrow="Servicios"
+        title="Elegí el mecanismo que tu negocio necesita"
+        intro="Tres paquetes con precio y plazo publicados. Si tu proyecto no entra en ninguno, lo armamos a medida."
+      />
+      <div class="grid gap-6 md:grid-cols-3">
+        {
+          services.map((s) => (
+            <Card featured={s.featured} class="reveal">
+              {s.featured && (
+                <span class="absolute -top-3 left-6 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-ink-900">El más elegido</span>
+              )}
+              <h3 class="text-2xl font-semibold">{s.name}</h3>
+              <p class="mt-3 flex-1 leading-relaxed text-muted">{s.summary}</p>
+              <p class="mt-6 font-serif text-2xl text-gold">{s.price}</p>
+              <p class="mt-1 text-sm text-muted">Entrega en {s.time}</p>
+              <Button href="#contacto" variant="secondary" class="mt-6 w-full">Consultar este paquete</Button>
+            </Card>
+          ))
+        }
+      </div>
+      <p class="mt-8 text-center text-sm text-muted">
+        También: mantenimiento mensual desde USD 60, rediseño de sitios existentes, tiendas online y auditoría SEO.
+        <a href="#contacto" class="text-gold underline underline-offset-4">Consultame</a>.
+      </p>
+    </Section>
+
+    {/* PROCESO */}
+    <Section id="proceso" tone="surface" labelledby="proceso-titulo">
+      <SectionHeading
+        id="proceso-titulo"
+        eyebrow="Cómo trabajamos"
+        title="Cinco pasos, sin sorpresas"
+        intro="Sabés en cada momento qué se está haciendo, cuánto cuesta y cuándo termina."
+      />
+      <ol class="grid gap-6 md:grid-cols-5">
+        {
+          steps.map((step, i) => (
+            <li class="reveal border-t-2 border-gold/40 pt-5">
+              <span class="font-serif text-3xl text-gold">0{i + 1}</span>
+              <h3 class="mt-2 text-lg font-semibold">{step.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </Section>
+
+    {/* PROYECTOS */}
+    <Section id="proyectos" labelledby="proyectos-titulo">
+      <SectionHeading
+        id="proyectos-titulo"
+        eyebrow="Proyectos"
+        title="Trabajos que ya están funcionando"
+        intro="Cada proyecto va a tener su caso de estudio con el problema, el proceso y los resultados."
+      />
+      <div class="grid gap-8 md:grid-cols-2">
+        {
+          projects.map((p) => (
+            <Card href={p.href} flush class="reveal overflow-hidden">
+              <Image src={p.image} alt={`Captura del sitio de ${p.title}`} class="aspect-[16/10] w-full object-cover" widths={[480, 800]} sizes="(min-width: 768px) 50vw, 100vw" />
+              <div class="p-6 md:p-8">
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{p.sector}</p>
+                <h3 class="mt-2 text-2xl font-semibold group-hover:text-gold">{p.title}</h3>
+                <p class="mt-3 leading-relaxed text-muted">{p.summary}</p>
+                <span class="mt-5 inline-block text-sm font-semibold text-gold">Ver sitio en vivo →</span>
+              </div>
+            </Card>
+          ))
+        }
+      </div>
+    </Section>
+
+    {/* UTILIDADES Y RUA VISUAL */}
+    <Section tone="surface">
+      <div class="grid gap-6 md:grid-cols-2">
+        <Card href="/utilidades" class="reveal">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Gratis</p>
+          <h2 class="mt-2 text-2xl font-semibold">Taller de Utilidades</h2>
+          <p class="mt-3 flex-1 leading-relaxed text-muted">Generá links de WhatsApp, códigos QR y enlaces cortos sin registrarte.</p>
+          <span class="mt-5 text-sm font-semibold text-gold">Usar las herramientas →</span>
+        </Card>
+        <Card href="/ruavisual" class="reveal">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">RUA Visual</p>
+          <h2 class="mt-2 text-2xl font-semibold">¿Necesitás logo o piezas para redes?</h2>
+          <p class="mt-3 flex-1 leading-relaxed text-muted">Nuestra marca de diseño gráfico: identidad visual, templates e infografías hechas a mano.</p>
+          <span class="mt-5 text-sm font-semibold text-gold">Ver el portafolio →</span>
+        </Card>
+      </div>
+    </Section>
+
+    {/* PREGUNTAS FRECUENTES */}
+    <Section id="preguntas" labelledby="preguntas-titulo">
+      <SectionHeading id="preguntas-titulo" eyebrow="Preguntas frecuentes" title="Lo que todos preguntan antes de empezar" />
+      <div class="max-w-3xl divide-y divide-line border-y border-line">
+        {
+          faqs.map((f) => (
+            <details class="group py-5">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-serif text-lg font-semibold">
+                {f.q}
+                <span class="text-gold transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <p class="mt-3 leading-relaxed text-muted">{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </Section>
+
+    {/* CONTACTO */}
+    <Section id="contacto" tone="wood" labelledby="contacto-titulo">
+      <div class="grid gap-12 md:grid-cols-2">
+        <div>
+          <SectionHeading
+            id="contacto-titulo"
+            eyebrow="Contacto"
+            title="Contame tu idea y te respondo en menos de 24 horas"
+            intro="La primera charla no tiene costo. Si preferís, escribime directo por WhatsApp."
+          />
+          <ul class="space-y-3 text-paper">
+            <li><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="hover:text-gold">WhatsApp: {WHATSAPP_DISPLAY}</a></li>
+            <li><a href={`mailto:${EMAIL}`} class="hover:text-gold">{EMAIL}</a></li>
+            <li class="text-muted">Cipolletti, Río Negro · trabajo en remoto</li>
+          </ul>
+        </div>
+
+        <form id="form-contacto" class="space-y-5 rounded-card border border-line bg-ink-900 p-6 md:p-8" novalidate>
+          <Field name="name" label="Nombre" required autocomplete="name" placeholder="Tu nombre o el de tu negocio" />
+          <Field name="email" label="Email" type="email" required autocomplete="email" placeholder="tu@correo.com" />
+          <Field name="subject" label="¿Qué necesitás?" type="select">
+            <option value="Sitio nuevo">Un sitio nuevo</option>
+            <option value="Rediseño">Renovar mi sitio actual</option>
+            <option value="Mantenimiento">Mantenimiento</option>
+            <option value="Consultoría">Consultoría o auditoría SEO</option>
+            <option value="Otra consulta">Otra consulta</option>
+          </Field>
+          <Field name="budget" label="Presupuesto estimado" type="select" hint="Me ayuda a proponerte la opción justa.">
+            <option value="">Prefiero no decirlo</option>
+            <option value="Menos de USD 400">Menos de USD 400</option>
+            <option value="USD 400 a 800">USD 400 a 800</option>
+            <option value="USD 800 a 1.500">USD 800 a 1.500</option>
+            <option value="Más de USD 1.500">Más de USD 1.500</option>
+          </Field>
+          <Field name="message" label="Contame tu proyecto" type="textarea" required placeholder="Qué hace tu negocio y qué te gustaría lograr con la web" />
+          <div class="hidden" aria-hidden="true">
+            <label for="campo-website">No completar este campo</label>
+            <input type="text" id="campo-website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+          <Button type="submit" size="lg" class="w-full">Enviar consulta</Button>
+          <p id="form-estado" class="min-h-5 text-center text-sm" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </Section>
+  </main>
+
+  <footer class="border-t border-line bg-ink-950 py-10 text-sm text-muted">
+    <div class="container-content flex flex-col justify-between gap-4 md:flex-row">
+      <p>© {new Date().getFullYear()} El Artesano Web · Alfredo Sobarzo Longarini</p>
+      <nav aria-label="Pie de página" class="flex gap-6">
+        <a href="/utilidades" class="hover:text-gold">Utilidades</a>
+        <a href="/ruavisual" class="hover:text-gold">RUA Visual</a>
+        <a href="https://www.instagram.com/elartesanoweb/" target="_blank" rel="noopener noreferrer" class="hover:text-gold">Instagram</a>
+      </nav>
+    </div>
+  </footer>
+
+  <WhatsAppButton />
+</BaseLayout>
+
+<script>
+  // Envío del formulario al endpoint existente (/api/send) sin recargar la página
+  const form = document.getElementById("form-contacto") as HTMLFormElement | null;
+  const estado = document.getElementById("form-estado");
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity() || !estado) return;
+
+    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+    const message = data.budget ? `${data.message}\n\nPresupuesto estimado: ${data.budget}` : data.message;
+    const button = form.querySelector("button[type=submit]") as HTMLButtonElement;
+
+    button.disabled = true;
+    estado.className = "min-h-5 text-center text-sm text-muted";
+    estado.textContent = "Enviando…";
+
+    try {
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: data.name, email: data.email, subject: data.subject, message, website: data.website }),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(body.error);
+
+      (window as any).va?.("event", { name: "Formulario enviado", data: { origen: "prototipo", interes: data.subject } });
+      form.reset();
+      estado.className = "min-h-5 text-center text-sm text-gold";
+      estado.textContent = body.id ? `¡Gracias! Tu referencia es ${body.id}.` : "¡Gracias! Te respondo pronto.";
+    } catch (err) {
+      estado.className = "min-h-5 text-center text-sm text-red-300";
+      estado.textContent = (err as Error).message || "Algo falló. Probá de nuevo o escribime por WhatsApp.";
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>

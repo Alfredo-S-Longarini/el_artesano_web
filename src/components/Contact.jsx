@@ -63,7 +63,7 @@ const Contact = () => {
                             <span className="text-amber-500">Construir.</span>
                         </h2>
                         <p className="text-stone-400 font-sans text-lg mb-8 leading-relaxed">
-                            ¿Listo para darle vida a ese mecanismo digital? Cuéntame sobre tu proyecto y analicemos cómo puedo ayudarte a lograrlo.
+                            ¿Listo para darle vida a ese mecanismo digital? Contame sobre tu proyecto y analicemos cómo puedo ayudarte a lograrlo.
                         </p>
 
                         <div className="space-y-4">
@@ -129,7 +129,7 @@ const Contact = () => {
 
                             {/* Asunto (Dropdown) */}
                             <div>
-                                <label htmlFor="subject" className="block text-sm font-serif text-stone-300 mb-2">¿En qué estás interesado?</label>
+                                <label htmlFor="subject" className="block text-sm font-serif text-stone-300 mb-2">¿Qué te interesa?</label>
                                 <select
                                     id="subject"
                                     name="subject"
@@ -174,7 +174,7 @@ const Contact = () => {
                                     value={formData.message}
                                     onChange={handleChange}
                                     className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 placeholder-[#bbbbbb] text-[#EFEFEF] focus:outline-none focus:border-amber-500 transition-colors resize-none"
-                                    placeholder="Cuéntame un poco sobre tu proyecto..."
+                                    placeholder="Contame un poco sobre tu proyecto..."
                                 ></textarea>
                             </div>
 
@@ -198,7 +198,7 @@ const Contact = () => {
                                 </div>
                             )}
                             {status === 'error' && (
-                                <p className="text-red-400 text-center text-sm mt-2">Hubo un error. Por favor intenta de nuevo o escríbeme directo al correo.</p>
+                                <p className="text-red-400 text-center text-sm mt-2">Algo falló. Probá de nuevo o escribime por WhatsApp o al correo.</p>
                             )}
                         </form>
                     </div>
