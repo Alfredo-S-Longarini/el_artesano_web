@@ -1,0 +1,98 @@
+---
+// Pantalla de "estamos rediseñando el sitio". La muestra el middleware en todas
+// las rutas cuando MODO_REDISENO está en true (src/config/sitio.js).
+export const prerender = false;
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { EMAIL } from "../config/contact.js";
+---
+
+<BaseLayout
+  title="Estamos rediseñando el sitio | El Artesano Web"
+  description="El Artesano Web está renovando su sitio. Para cualquier consulta, escribinos por correo."
+  noindex
+>
+  <main
+    id="contenido"
+    class="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-16"
+  >
+    <!-- Engranaje decorativo de fondo -->
+    <svg
+      class="engranaje pointer-events-none absolute -right-24 -top-24 h-80 w-80 text-gold/10 sm:h-[28rem] sm:w-[28rem]"
+      viewBox="0 0 100 100"
+      aria-hidden="true"
+    >
+      <path
+        fill="currentColor"
+        d="M43 2h14l2 12a37 37 0 0 1 9 4l10-7 10 10-7 10a37 37 0 0 1 4 9l12 2v14l-12 2a37 37 0 0 1-4 9l7 10-10 10-10-7a37 37 0 0 1-9 4l-2 12H43l-2-12a37 37 0 0 1-9-4l-10 7-10-10 7-10a37 37 0 0 1-4-9L3 57V43l12-2a37 37 0 0 1 4-9l-7-10 10-10 10 7a37 37 0 0 1 9-4zM50 32a18 18 0 1 0 0 36 18 18 0 0 0 0-36z"
+      />
+    </svg>
+    <svg
+      class="engranaje engranaje--inverso pointer-events-none absolute -bottom-16 -left-16 h-56 w-56 text-gold/10 sm:h-72 sm:w-72"
+      viewBox="0 0 100 100"
+      aria-hidden="true"
+    >
+      <path
+        fill="currentColor"
+        d="M43 2h14l2 12a37 37 0 0 1 9 4l10-7 10 10-7 10a37 37 0 0 1 4 9l12 2v14l-12 2a37 37 0 0 1-4 9l7 10-10 10-10-7a37 37 0 0 1-9 4l-2 12H43l-2-12a37 37 0 0 1-9-4l-10 7-10-10 7-10a37 37 0 0 1-4-9L3 57V43l12-2a37 37 0 0 1 4-9l-7-10 10-10 10 7a37 37 0 0 1 9-4zM50 32a18 18 0 1 0 0 36 18 18 0 0 0 0-36z"
+      />
+    </svg>
+
+    <div class="relative mx-auto w-full max-w-xl text-center">
+      <img
+        src="/img/El-Artesano-Web-Logo.webp"
+        alt="El Artesano Web"
+        width="120"
+        height="120"
+        class="mx-auto mb-8 h-24 w-24 rounded-card object-contain sm:h-28 sm:w-28"
+      />
+
+      <p class="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-gold">
+        Taller en obra
+      </p>
+      <h1 class="text-3xl leading-tight text-paper sm:text-5xl">
+        Estamos rediseñando el sitio
+      </h1>
+      <p class="mx-auto mt-5 max-w-md text-base leading-relaxed text-muted sm:text-lg">
+        Estamos ajustando cada engranaje para traerte una versión nueva de El Artesano Web.
+        Mientras tanto, seguimos trabajando: si tenés una consulta, escribinos.
+      </p>
+
+      <div class="mx-auto my-8 h-px w-24 bg-gold/40"></div>
+
+      <p class="text-sm text-muted">Escribinos a</p>
+      <a
+        href={`mailto:${EMAIL}`}
+        class="mt-2 inline-flex max-w-full items-center gap-2 break-all rounded-btn border border-gold/60 px-5 py-3 font-semibold text-gold transition-colors hover:bg-gold hover:text-ink-900"
+      >
+        <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="m3 7 9 6 9-6" />
+        </svg>
+        {EMAIL}
+      </a>
+
+      <p class="mt-10 text-xs text-muted/80">© {new Date().getFullYear()} El Artesano Web</p>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .engranaje {
+    animation: girar 60s linear infinite;
+  }
+  .engranaje--inverso {
+    animation-direction: reverse;
+    animation-duration: 45s;
+  }
+  @keyframes girar {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .engranaje {
+      animation: none;
+    }
+  }
+</style>
